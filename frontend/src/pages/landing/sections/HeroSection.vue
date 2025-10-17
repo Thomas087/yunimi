@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import Button from "primevue/button"
 
+const router = useRouter()
+
 const handleGetStarted = () => {
-  console.log('Get Started clicked')
-  // Add your navigation logic here
+  router.push('/signup')
 }
 
 const handleLearnMore = () => {
