@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import Steps from 'primevue/steps'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
-import Message from 'primevue/message'
 import CompanyInformationStep from './signup/CompanyInformationStep.vue'
 import SocialMediaSelectionStep from './signup/SocialMediaSelectionStep.vue'
 import AccountCreationStep from './signup/AccountCreationStep.vue'
@@ -154,31 +153,37 @@ const goBack = () => {
               :errors="validationErrors"
             />
           </div>
-
-          <div class="step-actions">
-            <Button 
-              label="Back" 
-              severity="secondary" 
-              outlined
-              @click="prevStep"
-              :disabled="activeStep === 0"
-            />
-            
-            <div class="right-actions">
-              <Button 
-                label="Cancel" 
-                severity="secondary" 
-                text
-                @click="goBack"
-              />
-              <Button 
-                :label="activeStep === steps.length - 1 ? 'Complete Signup' : 'Next'"
-                @click="nextStep"
-              />
-            </div>
-          </div>
         </template>
       </Card>
+
+      <!-- Fixed Bottom Navigation Bar -->
+      <div class="bottom-navigation">
+        <div class="nav-container">
+          <Button 
+            label="Back" 
+            severity="secondary" 
+            outlined
+            @click="prevStep"
+            :disabled="activeStep === 0"
+            class="nav-button"
+          />
+          
+          <div class="right-actions">
+            <Button 
+              label="Cancel" 
+              severity="secondary" 
+              text
+              @click="goBack"
+              class="nav-button"
+            />
+            <Button 
+              :label="activeStep === steps.length - 1 ? 'Complete Signup' : 'Next'"
+              @click="nextStep"
+              class="nav-button primary-nav-button"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -225,14 +230,41 @@ const goBack = () => {
 .step-content {
   min-height: 400px;
   margin-bottom: 2rem;
+  padding-bottom: 100px; /* Add padding to prevent content from being hidden behind fixed nav */
 }
 
-.step-actions {
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e9ecef;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid #e9ecef;
+}
+
+.nav-button {
+  min-width: 100px;
+}
+
+.primary-nav-button {
+  background: #007bff !important;
+  border-color: #007bff !important;
+}
+
+.primary-nav-button:hover {
+  background: #0056b3 !important;
+  border-color: #0056b3 !important;
 }
 
 .right-actions {
@@ -250,7 +282,8 @@ const goBack = () => {
     font-size: 2rem;
   }
   
-  .step-actions {
+  .nav-container {
+    padding: 1rem;
     flex-direction: column;
     gap: 1rem;
   }
@@ -258,6 +291,21 @@ const goBack = () => {
   .right-actions {
     width: 100%;
     justify-content: space-between;
+  }
+  
+  .nav-button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0.75rem;
+  }
+  
+  .nav-button {
+    min-width: 80px;
+    font-size: 0.9rem;
   }
 }
 </style>
