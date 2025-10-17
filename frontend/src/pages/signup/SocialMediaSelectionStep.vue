@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import Checkbox from 'primevue/checkbox'
 import Message from 'primevue/message'
+import { PLATFORM_CONFIGS } from '../../constants/platforms'
 
 interface SocialMediaData {
   selectedPlatforms: string[]
@@ -24,32 +25,7 @@ const socialMediaData = computed({
   set: (value: SocialMediaData) => emit('update:modelValue', value)
 })
 
-const socialMediaOptions = [
-  { 
-    value: 'red', 
-    label: 'Red', 
-    description: 'China\'s leading social media platform',
-    icon: '🔴'
-  },
-  { 
-    value: 'weibo', 
-    label: 'Weibo', 
-    description: 'China\'s Twitter equivalent',
-    icon: '📱'
-  },
-  { 
-    value: 'wechat', 
-    label: 'WeChat', 
-    description: 'Multi-purpose messaging and social app',
-    icon: '💬'
-  },
-  { 
-    value: 'douyin', 
-    label: 'Douyin', 
-    description: 'China\'s TikTok - short video platform',
-    icon: '🎵'
-  }
-]
+const socialMediaOptions = PLATFORM_CONFIGS
 
 const togglePlatform = (platformValue: string, event?: Event) => {
   // Prevent event bubbling if this is called from checkbox click

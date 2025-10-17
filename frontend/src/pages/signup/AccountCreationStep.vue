@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import Dropdown from 'primevue/dropdown'
 import Message from 'primevue/message'
 import Card from 'primevue/card'
+import { getPlatformConfig } from '../../constants/platforms'
 
 interface PlatformAccountOption {
   platform: string
@@ -37,18 +38,14 @@ const accountOptions = [
   { label: 'I need help creating an account', value: 'need_help' }
 ]
 
-const platformLabels: Record<string, string> = {
-  red: 'Red',
-  weibo: 'Weibo',
-  wechat: 'WeChat',
-  douyin: 'Douyin'
+const getPlatformLabel = (platformValue: string): string => {
+  const config = getPlatformConfig(platformValue)
+  return config ? config.label : platformValue
 }
 
-const platformIcons: Record<string, string> = {
-  red: '🔴',
-  weibo: '📱',
-  wechat: '💬',
-  douyin: '🎵'
+const getPlatformIcon = (platformValue: string): string => {
+  const config = getPlatformConfig(platformValue)
+  return config ? config.icon : '📱'
 }
 
 const updatePlatformOption = (platform: string, option: string) => {
@@ -96,8 +93,8 @@ const getPlatformError = (platform: string) => {
           <template #content>
             <div class="platform-header">
               <div class="platform-info">
-                <span class="platform-icon">{{ platformIcons[platform] }}</span>
-                <h3 class="platform-name">{{ platformLabels[platform] }}</h3>
+                <span class="platform-icon">{{ getPlatformIcon(platform) }}</span>
+                <h3 class="platform-name">{{ getPlatformLabel(platform) }}</h3>
               </div>
             </div>
             
