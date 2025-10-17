@@ -7,7 +7,7 @@ import Card from 'primevue/card'
 import Message from 'primevue/message'
 import CompanyInformationStep from './signup/CompanyInformationStep.vue'
 import SocialMediaSelectionStep from './signup/SocialMediaSelectionStep.vue'
-import RedAccountStep from './signup/RedAccountStep.vue'
+import AccountCreationStep from './signup/AccountCreationStep.vue'
 import PaymentStep from './signup/PaymentStep.vue'
 
 const router = useRouter()
@@ -17,7 +17,7 @@ const activeStep = ref(0)
 const steps = [
   { label: 'Company Info' },
   { label: 'Social Media' },
-  { label: 'Red Account' },
+  { label: 'Account Creation' },
   { label: 'Payment' }
 ]
 
@@ -32,11 +32,8 @@ const formData = reactive({
   socialMedia: {
     selectedPlatforms: []
   },
-  redAccount: {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+  accountCreation: {
+    platformOptions: []
   },
   payment: {
     plan: '',
@@ -64,12 +61,15 @@ const validateCurrentStep = () => {
       errors.selectedPlatforms = 'Please select at least one social media platform'
     }
   } else if (activeStep.value === 2) {
-    if (!formData.redAccount.username) errors.username = 'Username is required'
-    if (!formData.redAccount.email) errors.email = 'Email is required'
-    if (!formData.redAccount.password) errors.password = 'Password is required'
-    if (formData.redAccount.password !== formData.redAccount.confirmPassword) {
-      errors.confirmPassword = 'Passwords do not match'
-    }
+    // Validate that each selected platform has an option chosen
+    formData.socialMedia.selectedPlatforms.forEach(platform => {
+      const hasOption = formData.accountCreation.platformOptions.some(
+        option => option.platform === platform
+      )
+      if (!hasOption) {
+        errors[`${platform}_option`] = `Please select an option for ${platform}`
+      }
+    })
   } else if (activeStep.value === 3) {
     if (!formData.payment.plan) errors.plan = 'Please select a plan'
     if (!formData.payment.cardNumber) errors.cardNumber = 'Card number is required'
@@ -141,10 +141,11 @@ const goBack = () => {
               :errors="validationErrors"
             />
             
-            <RedAccountStep 
+            <AccountCreationStep 
               v-if="activeStep === 2"
-              v-model="formData.redAccount"
+              v-model="formData.accountCreation"
               :errors="validationErrors"
+              :selectedPlatforms="formData.socialMedia.selectedPlatforms"
             />
             
             <PaymentStep 
