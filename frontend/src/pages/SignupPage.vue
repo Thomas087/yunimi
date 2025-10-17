@@ -6,6 +6,7 @@ import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Message from 'primevue/message'
 import CompanyInformationStep from './signup/CompanyInformationStep.vue'
+import SocialMediaSelectionStep from './signup/SocialMediaSelectionStep.vue'
 import RedAccountStep from './signup/RedAccountStep.vue'
 import PaymentStep from './signup/PaymentStep.vue'
 
@@ -15,6 +16,7 @@ const router = useRouter()
 const activeStep = ref(0)
 const steps = [
   { label: 'Company Info' },
+  { label: 'Social Media' },
   { label: 'Red Account' },
   { label: 'Payment' }
 ]
@@ -26,6 +28,9 @@ const formData = reactive({
     name: '',
     website: '',
     instagram: ''
+  },
+  socialMedia: {
+    selectedPlatforms: []
   },
   redAccount: {
     username: '',
@@ -55,13 +60,17 @@ const validateCurrentStep = () => {
     if (!formData.company.website) errors.website = 'Website URL is required'
     if (!formData.company.instagram) errors.instagram = 'Instagram account is required'
   } else if (activeStep.value === 1) {
+    if (formData.socialMedia.selectedPlatforms.length === 0) {
+      errors.selectedPlatforms = 'Please select at least one social media platform'
+    }
+  } else if (activeStep.value === 2) {
     if (!formData.redAccount.username) errors.username = 'Username is required'
     if (!formData.redAccount.email) errors.email = 'Email is required'
     if (!formData.redAccount.password) errors.password = 'Password is required'
     if (formData.redAccount.password !== formData.redAccount.confirmPassword) {
       errors.confirmPassword = 'Passwords do not match'
     }
-  } else if (activeStep.value === 2) {
+  } else if (activeStep.value === 3) {
     if (!formData.payment.plan) errors.plan = 'Please select a plan'
     if (!formData.payment.cardNumber) errors.cardNumber = 'Card number is required'
     if (!formData.payment.expiryDate) errors.expiryDate = 'Expiry date is required'
@@ -126,14 +135,20 @@ const goBack = () => {
               :errors="validationErrors"
             />
             
-            <RedAccountStep 
+            <SocialMediaSelectionStep 
               v-if="activeStep === 1"
+              v-model="formData.socialMedia"
+              :errors="validationErrors"
+            />
+            
+            <RedAccountStep 
+              v-if="activeStep === 2"
               v-model="formData.redAccount"
               :errors="validationErrors"
             />
             
             <PaymentStep 
-              v-if="activeStep === 2"
+              v-if="activeStep === 3"
               v-model="formData.payment"
               :errors="validationErrors"
             />
