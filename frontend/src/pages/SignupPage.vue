@@ -158,8 +158,9 @@ const goBack = () => {
 
       <!-- Fixed Bottom Navigation Bar -->
       <div class="bottom-navigation">
-        <div class="nav-container">
+        <div class="nav-container" :class="{ 'single-button': activeStep === steps.length - 1 }">
           <Button 
+            v-if="activeStep !== steps.length - 1"
             label="Back" 
             severity="secondary" 
             outlined
@@ -169,6 +170,7 @@ const goBack = () => {
           
           <div class="right-actions">
             <Button 
+              v-if="activeStep !== steps.length - 1"
               label="Cancel" 
               severity="secondary" 
               text
@@ -177,6 +179,7 @@ const goBack = () => {
             <Button 
               :label="activeStep === steps.length - 1 ? 'Complete Signup' : 'Next'"
               @click="nextStep"
+              :disabled="activeStep === steps.length - 1"
             />
           </div>
         </div>
@@ -248,6 +251,10 @@ const goBack = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.nav-container.single-button {
+  justify-content: flex-end;
 }
 .right-actions {
   display: flex;
