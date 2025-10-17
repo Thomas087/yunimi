@@ -4,6 +4,7 @@ import Dropdown from 'primevue/dropdown'
 import Message from 'primevue/message'
 import Card from 'primevue/card'
 import { getPlatformConfig } from '../../constants/platforms'
+import PlatformIcon from '../../components/shared/PlatformIcon.vue'
 
 interface PlatformAccountOption {
   platform: string
@@ -41,11 +42,6 @@ const accountOptions = [
 const getPlatformLabel = (platformValue: string): string => {
   const config = getPlatformConfig(platformValue)
   return config ? config.label : platformValue
-}
-
-const getPlatformIcon = (platformValue: string): string => {
-  const config = getPlatformConfig(platformValue)
-  return config ? config.icon : '📱'
 }
 
 const updatePlatformOption = (platform: string, option: string) => {
@@ -93,7 +89,11 @@ const getPlatformError = (platform: string) => {
           <template #content>
             <div class="platform-header">
               <div class="platform-info">
-                <span class="platform-icon">{{ getPlatformIcon(platform) }}</span>
+                <PlatformIcon 
+                  :platform="platform" 
+                  size="medium"
+                  :useImage="true"
+                />
                 <h3 class="platform-name">{{ getPlatformLabel(platform) }}</h3>
               </div>
             </div>

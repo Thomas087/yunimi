@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import Checkbox from 'primevue/checkbox'
 import Message from 'primevue/message'
 import { PLATFORM_CONFIGS } from '../../constants/platforms'
+import PlatformIcon from '../../components/shared/PlatformIcon.vue'
 
 interface SocialMediaData {
   selectedPlatforms: string[]
@@ -73,7 +74,11 @@ const isPlatformSelected = (platformValue: string) => {
         >
           <div class="platform-content">
             <div class="platform-header">
-              <span class="platform-icon">{{ platform.icon }}</span>
+              <PlatformIcon 
+                :platform="platform.value" 
+                size="large"
+                :useImage="true"
+              />
               <Checkbox 
                 :modelValue="isPlatformSelected(platform.value)"
                 :binary="true"
