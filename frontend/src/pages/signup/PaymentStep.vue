@@ -4,6 +4,7 @@ import InputText from 'primevue/inputtext'
 import Dropdown from 'primevue/dropdown'
 import Message from 'primevue/message'
 import Card from 'primevue/card'
+import StepInfo from '../../components/shared/StepInfo.vue'
 
 interface PaymentData {
   plan: string
@@ -227,17 +228,16 @@ const handleExpiryInput = (event: Event) => {
       </div>
     </div>
 
-    <div class="step-info">
-      <div class="info-card">
-        <h4>Secure Payment</h4>
-        <ul>
-          <li>Your payment information is encrypted and secure</li>
-          <li>We accept all major credit cards</li>
-          <li>You can cancel or change your plan anytime</li>
-          <li>First month is free with any plan</li>
-        </ul>
-      </div>
-    </div>
+    <StepInfo
+      title="Secure Payment"
+      :items="[
+        'Your payment information is encrypted and secure',
+        'We accept all major credit cards',
+        'You can cancel or change your plan anytime',
+        'First month is free with any plan'
+      ]"
+      variant="success"
+    />
   </div>
 </template>
 
@@ -357,29 +357,6 @@ const handleExpiryInput = (event: Event) => {
   margin-top: 0.25rem;
 }
 
-.step-info {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  border-left: 4px solid #28a745;
-}
-
-.info-card h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.info-card ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: #6c757d;
-}
-
-.info-card li {
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -397,8 +374,5 @@ const handleExpiryInput = (event: Event) => {
     gap: 1rem;
   }
   
-  .step-info {
-    padding: 1rem;
-  }
 }
 </style>

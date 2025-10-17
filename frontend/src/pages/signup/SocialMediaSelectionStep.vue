@@ -4,6 +4,7 @@ import Checkbox from 'primevue/checkbox'
 import Message from 'primevue/message'
 import { PLATFORM_CONFIGS } from '../../constants/platforms'
 import PlatformIcon from '../../components/shared/PlatformIcon.vue'
+import StepInfo from '../../components/shared/StepInfo.vue'
 
 interface SocialMediaData {
   selectedPlatforms: string[]
@@ -103,17 +104,16 @@ const isPlatformSelected = (platformValue: string) => {
       </Message>
     </div>
 
-    <div class="step-info">
-      <div class="info-card">
-        <h4>Why select social media platforms?</h4>
-        <ul>
-          <li>We'll help you optimize content for each platform's unique audience</li>
-          <li>Different platforms have different content formats and best practices</li>
-          <li>You can always add or remove platforms later in your account settings</li>
-          <li>Each platform offers different engagement and reach opportunities</li>
-        </ul>
-      </div>
-    </div>
+    <StepInfo
+      title="Why select social media platforms?"
+      :items="[
+        'We\'ll help you optimize content for each platform\'s unique audience',
+        'Different platforms have different content formats and best practices',
+        'You can always add or remove platforms later in your account settings',
+        'Each platform offers different engagement and reach opportunities'
+      ]"
+      variant="info"
+    />
   </div>
 </template>
 
@@ -152,7 +152,7 @@ const isPlatformSelected = (platformValue: string) => {
 
 .platform-card {
   background: #fff;
-  border: 2px solid #e9ecef;
+  border: 2px solid var(--p-primary-100);
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
@@ -161,15 +161,15 @@ const isPlatformSelected = (platformValue: string) => {
 }
 
 .platform-card:hover {
-  border-color: #007bff;
+  border-color: var(--p-primary-300);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  box-shadow: 0 4px 12px var(--p-primary-300);
 }
 
 .platform-card.selected {
-  border-color: #007bff;
-  background-color: #f8f9ff;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  border-color: var(--p-primary-color);
+  background-color: var(--surface-hover);
+  box-shadow: 0 4px 12px var(--p-primary-color);
 }
 
 .platform-content {
@@ -209,29 +209,6 @@ const isPlatformSelected = (platformValue: string) => {
   margin-top: 1rem;
 }
 
-.step-info {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  border-left: 4px solid #17a2b8;
-}
-
-.info-card h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.info-card ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: #6c757d;
-}
-
-.info-card li {
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -248,9 +225,6 @@ const isPlatformSelected = (platformValue: string) => {
     padding: 1.25rem;
   }
   
-  .step-info {
-    padding: 1rem;
-  }
 }
 
 @media (max-width: 480px) {

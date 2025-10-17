@@ -5,6 +5,7 @@ import Message from 'primevue/message'
 import Card from 'primevue/card'
 import { getPlatformConfig } from '../../constants/platforms'
 import PlatformIcon from '../../components/shared/PlatformIcon.vue'
+import StepInfo from '../../components/shared/StepInfo.vue'
 
 interface PlatformAccountOption {
   platform: string
@@ -127,16 +128,15 @@ const getPlatformError = (platform: string) => {
       </div>
     </div>
 
-    <div class="step-info">
-      <div class="info-card">
-        <h4>Account Creation Options</h4>
-        <ul>
-          <li><strong>I already have an account:</strong> We'll help you connect your existing account</li>
-          <li><strong>I'll create an account myself:</strong> You'll handle account creation independently</li>
-          <li><strong>I need help creating an account:</strong> Our team will guide you through the process</li>
-        </ul>
-      </div>
-    </div>
+    <StepInfo
+      title="Account Creation Options"
+      :items="[
+        '<strong>I already have an account:</strong> We\'ll help you connect your existing account',
+        '<strong>I\'ll create an account myself:</strong> You\'ll handle account creation independently',
+        '<strong>I need help creating an account:</strong> Our team will guide you through the process'
+      ]"
+      variant="warning"
+    />
   </div>
 </template>
 
@@ -180,7 +180,7 @@ const getPlatformError = (platform: string) => {
 }
 
 .account-card:hover {
-  border-color: #007bff;
+  border-color: var(--p-primary-300);
   box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
 }
 
@@ -225,33 +225,6 @@ const getPlatformError = (platform: string) => {
   margin-top: 0.25rem;
 }
 
-.step-info {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  border-left: 4px solid #6f42c1;
-}
-
-.info-card h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.info-card ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: #6c757d;
-}
-
-.info-card li {
-  margin-bottom: 0.75rem;
-  line-height: 1.5;
-}
-
-.info-card li strong {
-  color: #2c3e50;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -263,9 +236,6 @@ const getPlatformError = (platform: string) => {
     gap: 1.25rem;
   }
   
-  .step-info {
-    padding: 1rem;
-  }
   
   .platform-info {
     flex-direction: column;

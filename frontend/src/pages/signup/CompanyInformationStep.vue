@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
+import StepInfo from '../../components/shared/StepInfo.vue'
 
 interface CompanyData {
   professionalEmail: string
@@ -124,17 +125,16 @@ const updateField = (field: keyof CompanyData, value: string) => {
       </div>
     </div>
 
-    <div class="step-info">
-      <div class="info-card">
-        <h4>Why do we need this information?</h4>
-        <ul>
-          <li>Professional email helps us verify your business identity</li>
-          <li>Company name helps us personalize your experience</li>
-          <li>Website URL allows us to verify your business</li>
-          <li>Instagram account helps us connect your social presence</li>
-        </ul>
-      </div>
-    </div>
+    <StepInfo
+      title="Why do we need this information?"
+      :items="[
+        'Professional email helps us verify your business identity',
+        'Company name helps us personalize your experience',
+        'Website URL allows us to verify your business',
+        'Instagram account helps us connect your social presence'
+      ]"
+      variant="primary"
+    />
   </div>
 </template>
 
@@ -201,29 +201,6 @@ const updateField = (field: keyof CompanyData, value: string) => {
   margin-top: 0.25rem;
 }
 
-.step-info {
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  border-left: 4px solid #007bff;
-}
-
-.info-card h4 {
-  color: #2c3e50;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-}
-
-.info-card ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: #6c757d;
-}
-
-.info-card li {
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -235,8 +212,5 @@ const updateField = (field: keyof CompanyData, value: string) => {
     gap: 1.25rem;
   }
   
-  .step-info {
-    padding: 1rem;
-  }
 }
 </style>
