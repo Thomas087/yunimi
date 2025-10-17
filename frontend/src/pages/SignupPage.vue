@@ -165,7 +165,6 @@ const goBack = () => {
             outlined
             @click="prevStep"
             :disabled="activeStep === 0"
-            class="nav-button"
           />
           
           <div class="right-actions">
@@ -174,12 +173,10 @@ const goBack = () => {
               severity="secondary" 
               text
               @click="goBack"
-              class="nav-button"
             />
             <Button 
               :label="activeStep === steps.length - 1 ? 'Complete Signup' : 'Next'"
               @click="nextStep"
-              class="nav-button primary-nav-button"
             />
           </div>
         </div>
@@ -252,21 +249,6 @@ const goBack = () => {
   justify-content: space-between;
   align-items: center;
 }
-
-.nav-button {
-  min-width: 100px;
-}
-
-.primary-nav-button {
-  background: #007bff !important;
-  border-color: #007bff !important;
-}
-
-.primary-nav-button:hover {
-  background: #0056b3 !important;
-  border-color: #0056b3 !important;
-}
-
 .right-actions {
   display: flex;
   gap: 1rem;
@@ -293,19 +275,11 @@ const goBack = () => {
     justify-content: space-between;
   }
   
-  .nav-button {
-    flex: 1;
-  }
 }
 
 @media (max-width: 480px) {
   .nav-container {
     padding: 0.75rem;
-  }
-  
-  .nav-button {
-    min-width: 80px;
-    font-size: 0.9rem;
   }
 }
 </style>
