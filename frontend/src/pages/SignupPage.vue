@@ -22,6 +22,7 @@ const steps = [
 // Form data
 const formData = reactive({
   company: {
+    professionalEmail: '',
     name: '',
     website: '',
     instagram: ''
@@ -49,6 +50,7 @@ const validateCurrentStep = () => {
   const errors: Record<string, string> = {}
   
   if (activeStep.value === 0) {
+    if (!formData.company.professionalEmail) errors.professionalEmail = 'Professional email is required'
     if (!formData.company.name) errors.companyName = 'Company name is required'
     if (!formData.company.website) errors.website = 'Website URL is required'
     if (!formData.company.instagram) errors.instagram = 'Instagram account is required'

@@ -4,6 +4,7 @@ import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 
 interface CompanyData {
+  professionalEmail: string
   name: string
   website: string
   instagram: string
@@ -42,6 +43,26 @@ const updateField = (field: keyof CompanyData, value: string) => {
     </div>
 
     <div class="form-fields">
+      <div class="field">
+        <label for="professionalEmail">Professional Email *</label>
+        <InputText
+          id="professionalEmail"
+          v-model="companyData.professionalEmail"
+          type="email"
+          placeholder="your.email@company.com"
+          :class="{ 'p-invalid': errors.professionalEmail }"
+          @input="updateField('professionalEmail', $event.target.value)"
+        />
+        <Message 
+          v-if="errors.professionalEmail" 
+          severity="error" 
+          :closable="false"
+          class="error-message"
+        >
+          {{ errors.professionalEmail }}
+        </Message>
+      </div>
+
       <div class="field">
         <label for="companyName">Company Name *</label>
         <InputText
@@ -107,6 +128,7 @@ const updateField = (field: keyof CompanyData, value: string) => {
       <div class="info-card">
         <h4>Why do we need this information?</h4>
         <ul>
+          <li>Professional email helps us verify your business identity</li>
           <li>Company name helps us personalize your experience</li>
           <li>Website URL allows us to verify your business</li>
           <li>Instagram account helps us connect your social presence</li>
