@@ -1,15 +1,29 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Steps from 'primevue/steps'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import Message from 'primevue/message'
 import CompanyInformationStep from './signup/CompanyInformationStep.vue'
 import SocialMediaSelectionStep from './signup/SocialMediaSelectionStep.vue'
 import AccountCreationStep from './signup/AccountCreationStep.vue'
 import PaymentStep from './signup/PaymentStep.vue'
+import { useSignup } from '../composables/useSignup'
 
 const router = useRouter()
+
+// Use the signup composable
+const { 
+  formData, 
+  isLoading, 
+  error, 
+  signupAttemptId,
+  sessionId,
+  createSignupAttempt, 
+  updateSignupData, 
+  completeSignup 
+} = useSignup()
 
 // Step management
 const activeStep = ref(0)
@@ -19,30 +33,6 @@ const steps = [
   { label: 'Account Creation' },
   { label: 'Payment' }
 ]
-
-// Form data
-const formData = reactive({
-  company: {
-    professionalEmail: '',
-    name: '',
-    website: '',
-    instagram: ''
-  },
-  socialMedia: {
-    selectedPlatforms: []
-  },
-  accountCreation: {
-    platformOptions: []
-  },
-  payment: {
-    plan: '',
-    cardNumber: '',
-    expiryDate: '',
-    cvv: '',
-    cardholderName: '',
-    billingAddress: ''
-  }
-})
 
 // Validation state
 const validationErrors = ref<Record<string, string>>({})
@@ -81,13 +71,32 @@ const validateCurrentStep = () => {
   return Object.keys(errors).length === 0
 }
 
-const nextStep = () => {
+const nextStep = async () => {
   if (validateCurrentStep()) {
-    if (activeStep.value < steps.length - 1) {
-      activeStep.value++
-    } else {
-      // Complete signup
-      completeSignup()
+    try {
+      // Create signup attempt when moving from step 0 to step 1 (after company info is filled)
+      if (activeStep.value === 0) {
+        await createSignupAttemptOnFirstStep()
+      }
+      
+      // Save current step data to Supabase (step 0 becomes step 1 in database)
+      await updateSignupData(activeStep.value + 1)
+      
+      if (activeStep.value < steps.length - 1) {
+        activeStep.value++
+      } else {
+        // Complete signup (step 3 becomes step 4 in database)
+        await completeSignup()
+        router.push('/')
+      }
+    } catch (err) {
+      console.error('Failed to save signup data:', err)
+      // Continue with the step even if saving fails
+      if (activeStep.value < steps.length - 1) {
+        activeStep.value++
+      } else {
+        router.push('/')
+      }
     }
   }
 }
@@ -98,12 +107,15 @@ const prevStep = () => {
   }
 }
 
-const completeSignup = () => {
-  // Here you would typically send the data to your backend
-  console.log('Signup completed:', formData)
-  
-  // Show success message and redirect
-  router.push('/')
+// Create signup attempt when user completes the first step
+const createSignupAttemptOnFirstStep = async () => {
+  if (!signupAttemptId.value) {
+    try {
+      await createSignupAttempt()
+    } catch (err) {
+      console.error('Failed to create signup attempt:', err)
+    }
+  }
 }
 
 const goBack = () => {
@@ -121,6 +133,17 @@ const goBack = () => {
 
       <Card class="signup-card">
         <template #content>
+          <!-- Error Message -->
+          <Message 
+            v-if="error" 
+            severity="error" 
+            :closable="true"
+            @close="error = null"
+            class="error-message"
+          >
+            {{ error }}
+          </Message>
+          
           <Steps 
             :model="steps" 
             :activeStep="activeStep"
@@ -179,7 +202,8 @@ const goBack = () => {
             <Button 
               :label="activeStep === steps.length - 1 ? 'Complete Signup' : 'Next'"
               @click="nextStep"
-              :disabled="activeStep === steps.length - 1"
+              :loading="isLoading"
+              :disabled="isLoading"
             />
           </div>
         </div>
@@ -221,6 +245,10 @@ const goBack = () => {
 .signup-card {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
+}
+
+.error-message {
+  margin-bottom: 1rem;
 }
 
 .signup-steps {
