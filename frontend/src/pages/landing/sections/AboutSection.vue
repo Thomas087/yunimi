@@ -17,24 +17,20 @@ const handleContact = () => {
         <div class="about-text">
           <h2>About Yunimi</h2>
           <p>
-            We are passionate about creating solutions that make a difference. 
-            Our team of experts works tirelessly to deliver products that not only 
-            meet your needs but exceed your expectations.
+            Based in Beijing, Shanghai and Paris, we are a dedicated team of developers and marketers passionate about bridging the gap between Western brands and Chinese consumers.
           </p>
           <p>
-            Founded with a vision to simplify complex processes, Yunimi has grown 
-            to become a trusted partner for businesses of all sizes. We believe 
-            in the power of technology to transform the way we work and live.
+            Our solutions are easy to use, compliant with Chinese regulations. Our support team is available 24/7 to help you with any questions you may have.
           </p>
           <Button 
-            label="Contact Us" 
+            label="Get started" 
             size="large"
             @click="handleContact"
           />
         </div>
         <div class="about-stats">
-          <StatCard value="10K+" label="Happy Customers" />
-          <StatCard value="99.9%" label="Uptime" />
+          <StatCard value="300+" label="Happy Customers" />
+          <StatCard value="35 000" label="Posts published" />
           <StatCard value="24/7" label="Support" />
         </div>
       </div>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Button from "primevue/button"
+
+const router = useRouter()
 
 const plans = ref([
   {
@@ -37,9 +40,11 @@ const plans = ref([
 ])
 
 const handleGetStarted = (planName: string) => {
-  // Navigate to signup with plan selection
-  console.log(`Selected plan: ${planName}`)
-  // You can add routing logic here if needed
+  router.push('/signup')
+  // Ensure we scroll to top after navigation
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, 100)
 }
 </script>
 
