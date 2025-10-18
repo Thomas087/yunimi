@@ -17,21 +17,34 @@ defineProps<Props>()
 <style scoped>
 .stat-card {
   text-align: center;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
 }
 
 .stat-value {
   font-size: 2.5rem;
-  font-weight: 700;
-  color: #667eea;
+  font-weight: 800;
+  color: #1e293b;
   margin-bottom: 0.5rem;
+  line-height: 1;
 }
 
 .stat-label {
-  color: #6c757d;
-  font-weight: 500;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.95rem;
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 </style>
