@@ -27,6 +27,39 @@ const companyData = computed({
   set: (value: CompanyData) => emit('update:modelValue', value)
 })
 
+// Validation helper functions
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(email)
+}
+
+const isValidUrl = (url: string): boolean => {
+  if (!url || url.trim().length === 0) return false
+  
+  try {
+    // Add protocol if missing
+    const urlToTest = url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`
+    const urlObj = new URL(urlToTest)
+    
+    // Check if it has a valid hostname (domain)
+    if (!urlObj.hostname || urlObj.hostname.length < 3) return false
+    
+    // Check if hostname contains at least one dot (for domain extension)
+    if (!urlObj.hostname.includes('.')) return false
+    
+    // Check if hostname doesn't contain spaces or invalid characters
+    if (urlObj.hostname.includes(' ') || urlObj.hostname.includes('..')) return false
+    
+    // Check that the domain extension is at least 2 characters
+    const parts = urlObj.hostname.split('.')
+    if (parts.length < 2 || parts[parts.length - 1].length < 2) return false
+    
+    return true
+  } catch {
+    return false
+  }
+}
+
 const updateField = (field: keyof CompanyData, value: string) => {
   companyData.value = {
     ...companyData.value,
@@ -52,17 +85,19 @@ const updateField = (field: keyof CompanyData, value: string) => {
           type="email"
           autocomplete="email"
           placeholder="your.email@company.com"
-          :class="{ 'p-invalid': errors.professionalEmail }"
+          :class="{ 
+            'p-invalid': errors.professionalEmail || (companyData.professionalEmail && !isValidEmail(companyData.professionalEmail))
+          }"
           @input="updateField('professionalEmail', ($event.target as HTMLInputElement).value)"
           class="signup-form-input form-input"
         />
         <Message 
-          v-if="errors.professionalEmail" 
+          v-if="errors.professionalEmail || (companyData.professionalEmail && !isValidEmail(companyData.professionalEmail))" 
           severity="error" 
           :closable="false"
           class="signup-error-message error-message"
         >
-          {{ errors.professionalEmail }}
+          {{ errors.professionalEmail || 'Please enter a valid email address' }}
         </Message>
       </div>
 
@@ -98,17 +133,19 @@ const updateField = (field: keyof CompanyData, value: string) => {
           type="url"
           autocomplete="url"
           placeholder="https://yourcompany.com"
-          :class="{ 'p-invalid': errors.website }"
+          :class="{ 
+            'p-invalid': errors.website || (companyData.website && !isValidUrl(companyData.website))
+          }"
           @input="updateField('website', ($event.target as HTMLInputElement).value)"
           class="signup-form-input form-input"
         />
         <Message 
-          v-if="errors.website" 
+          v-if="errors.website || (companyData.website && !isValidUrl(companyData.website))" 
           severity="error" 
           :closable="false"
           class="signup-error-message error-message"
         >
-          {{ errors.website }}
+          {{ errors.website || 'Please enter a valid website URL (e.g., https://example.com)' }}
         </Message>
       </div>
 

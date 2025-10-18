@@ -60,14 +60,62 @@ const steps = computed(() => {
 // Validation state
 const validationErrors = ref<Record<string, string>>({})
 
+// Validation helper functions
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return emailRegex.test(email)
+}
+
+const isValidUrl = (url: string): boolean => {
+  if (!url || url.trim().length === 0) return false
+  
+  try {
+    // Add protocol if missing
+    const urlToTest = url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`
+    const urlObj = new URL(urlToTest)
+    
+    // Check if it has a valid hostname (domain)
+    if (!urlObj.hostname || urlObj.hostname.length < 3) return false
+    
+    // Check if hostname contains at least one dot (for domain extension)
+    if (!urlObj.hostname.includes('.')) return false
+    
+    // Check if hostname doesn't contain spaces or invalid characters
+    if (urlObj.hostname.includes(' ') || urlObj.hostname.includes('..')) return false
+    
+    // Check that the domain extension is at least 2 characters
+    const parts = urlObj.hostname.split('.')
+    if (parts.length < 2 || parts[parts.length - 1].length < 2) return false
+    
+    return true
+  } catch {
+    return false
+  }
+}
+
 const validateCurrentStep = () => {
   const errors: Record<string, string> = {}
   
   if (activeStep.value === 0) {
-    if (!formData.company.professionalEmail) errors.professionalEmail = 'Professional email is required'
-    if (!formData.company.name) errors.companyName = 'Company name is required'
-    if (!formData.company.website) errors.website = 'Website URL is required'
-    if (!formData.company.instagram) errors.instagram = 'Instagram account is required'
+    if (!formData.company.professionalEmail) {
+      errors.professionalEmail = 'Professional email is required'
+    } else if (!isValidEmail(formData.company.professionalEmail)) {
+      errors.professionalEmail = 'Please enter a valid email address'
+    }
+    
+    if (!formData.company.name) {
+      errors.companyName = 'Company name is required'
+    }
+    
+    if (!formData.company.website) {
+      errors.website = 'Website URL is required'
+    } else if (!isValidUrl(formData.company.website)) {
+      errors.website = 'Please enter a valid website URL (e.g., https://example.com)'
+    }
+    
+    if (!formData.company.instagram) {
+      errors.instagram = 'Instagram account is required'
+    }
   } else if (activeStep.value === 1) {
     if (formData.socialMedia.selectedPlatforms.length === 0) {
       errors.selectedPlatforms = 'Please select at least one social media platform'
