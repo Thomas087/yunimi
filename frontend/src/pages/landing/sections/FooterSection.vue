@@ -1,5 +1,28 @@
 <script setup lang="ts">
+import { useRouter, useRoute } from 'vue-router'
 import Container from '../../../components/layout/Container.vue'
+
+const router = useRouter()
+const route = useRoute()
+
+// Smart navigation: smooth scroll if on landing page, navigate otherwise
+const navigateToSection = (href: string) => {
+  const isOnLandingPage = route.path === '/'
+  
+  if (isOnLandingPage) {
+    // If on landing page, smooth scroll to section
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  } else {
+    // If on another page, navigate to landing page with section
+    router.push(`/${href}`)
+  }
+}
 </script>
 
 <template>
@@ -15,20 +38,20 @@ import Container from '../../../components/layout/Container.vue'
           <div class="footer-links">
             <div class="link-group">
               <h5>Product</h5>
-              <a href="#features">Features</a>
-              <a href="#pricing">Pricing</a>
+              <a href="#features" @click.prevent="navigateToSection('#features')">Features</a>
+              <a href="#pricing" @click.prevent="navigateToSection('#pricing')">Pricing</a>
               <a href="#">Documentation</a>
             </div>
             <div class="link-group">
               <h5>Company</h5>
-              <a href="#about">About</a>
+              <a href="#about" @click.prevent="navigateToSection('#about')">About</a>
               <a href="#">Blog</a>
               <a href="#">Careers</a>
             </div>
             <div class="link-group">
               <h5>Support</h5>
               <a href="#">Help Center</a>
-              <a href="#contact">Contact</a>
+              <a href="#contact" @click.prevent="navigateToSection('#contact')">Contact</a>
               <a href="#">Status</a>
             </div>
           </div>

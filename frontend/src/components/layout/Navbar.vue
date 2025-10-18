@@ -10,6 +10,7 @@ const route = useRoute()
 const navItems = [
   { label: 'Home', href: '#hero' },
   { label: 'Features', href: '#features' },
+  { label: 'Pricing', href: '#pricing' },
   { label: 'About us', href: '#about' },
   { label: 'Contact', href: '#contact' }
 ]
