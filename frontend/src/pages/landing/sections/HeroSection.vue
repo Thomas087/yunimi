@@ -20,7 +20,7 @@ const handleGetStarted = () => {
       <div class="hero-left">
         <h1 class="hero-title">One-click translation & publishing for China's biggest social media</h1>
         <p class="hero-subtitle">
-          Expand your brand presence on WeChat, Douyin, Red, Weibo & beyond
+          Promote your brand on WeChat, Douyin, Red, Weibo & beyond
         </p>
         <div class="hero-actions">
           <Button 
@@ -76,7 +76,7 @@ const handleGetStarted = () => {
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
@@ -129,7 +129,7 @@ const handleGetStarted = () => {
 
 @media (max-width: 480px) {
   .hero {
-    padding: 0px 20px;
+    padding: 90px 20px 0px 20px; /* Top padding to account for navbar height (70px) + margin (20px) */
   }
   
   .hero-title {
