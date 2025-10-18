@@ -240,6 +240,7 @@ const goBack = () => {
 .signup-card {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
+  overflow: hidden;
 }
 
 .error-message {
@@ -253,7 +254,7 @@ const goBack = () => {
 .step-content {
   min-height: 400px;
   margin-bottom: 2rem;
-  padding-bottom: 100px; /* Add padding to prevent content from being hidden behind fixed nav */
+  padding-bottom: 100px;
 }
 
 .bottom-navigation {
@@ -279,37 +280,74 @@ const goBack = () => {
 .nav-container.single-button {
   justify-content: flex-end;
 }
+
 .right-actions {
   display: flex;
   gap: 1rem;
 }
 
-/* Responsive Design */
+/* Mobile responsive */
 @media (max-width: 768px) {
   .signup-page {
-    padding: 1rem 0.5rem;
+    padding: 1rem;
   }
   
   .signup-header h1 {
     font-size: 2rem;
   }
   
+  .signup-header p {
+    font-size: 1rem;
+  }
+  
+  .signup-card :deep(.p-card-content) {
+    padding: 1rem;
+  }
+  
+  .step-content {
+    min-height: 300px;
+    padding-bottom: 120px;
+  }
+  
   .nav-container {
     padding: 1rem;
-    flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
   }
   
   .right-actions {
-    width: 100%;
-    justify-content: space-between;
+    gap: 0.5rem;
   }
-  
 }
 
 @media (max-width: 480px) {
+  .signup-page {
+    padding: 0.75rem;
+  }
+  
+  .signup-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .signup-header p {
+    font-size: 0.9rem;
+  }
+  
+  .signup-card :deep(.p-card-content) {
+    padding: 0.75rem;
+  }
+  
+  .step-content {
+    min-height: 250px;
+    padding-bottom: 100px;
+  }
+  
   .nav-container {
     padding: 0.75rem;
+    gap: 0.25rem;
+  }
+  
+  .right-actions {
+    gap: 0.25rem;
   }
 }
 </style>
