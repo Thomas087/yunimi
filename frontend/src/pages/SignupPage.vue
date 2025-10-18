@@ -85,7 +85,8 @@ const isValidUrl = (url: string): boolean => {
     
     // Check that the domain extension is at least 2 characters
     const parts = urlObj.hostname.split('.')
-    if (parts.length < 2 || parts[parts.length - 1].length < 2) return false
+    const lastPart = parts[parts.length - 1]
+    if (parts.length < 2 || !lastPart || lastPart.length < 2) return false
     
     return true
   } catch {
