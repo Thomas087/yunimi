@@ -26,6 +26,13 @@ const sizeClasses = computed(() => {
       return 'platform-icon-medium'
   }
 })
+
+const handleImageError = (event: Event) => {
+  const target = event.target as HTMLImageElement
+  if (target) {
+    target.style.display = 'none'
+  }
+}
 </script>
 
 <template>
@@ -35,7 +42,7 @@ const sizeClasses = computed(() => {
       :src="imagePath" 
       :alt="`${platform} icon`"
       class="platform-icon-image"
-      @error="$event.target.style.display = 'none'"
+      @error="handleImageError"
     />
     <span 
       v-else 
