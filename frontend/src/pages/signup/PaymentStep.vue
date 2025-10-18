@@ -2,14 +2,7 @@
 import Card from 'primevue/card'
 import StepInfo from '../../components/shared/StepInfo.vue'
 
-interface PaymentData {
-  plan: string
-  cardNumber: string
-  expiryDate: string
-  cvv: string
-  cardholderName: string
-  billingAddress: string
-}
+type PaymentData = Record<string, never>
 
 interface Props {
   modelValue: PaymentData

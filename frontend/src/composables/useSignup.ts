@@ -1,5 +1,5 @@
-import { ref, reactive, onMounted } from 'vue'
-import { supabase, saveSignupAttempt, updateSignupAttempt, getCurrentSessionInfo, signInAnonymouslyAndGetSession, type SignupAttempt } from '../lib/supabase'
+import { ref, reactive } from 'vue'
+import { saveSignupAttempt, updateSignupAttempt, getCurrentSessionInfo, signInAnonymouslyAndGetSession, type SignupAttempt } from '../lib/supabase'
 
 export interface SignupFormData {
   company: {
@@ -14,14 +14,7 @@ export interface SignupFormData {
   accountCreation: {
     platformOptions: Array<{ platform: string; option: string }>
   }
-  payment: {
-    plan: string
-    cardNumber: string
-    expiryDate: string
-    cvv: string
-    cardholderName: string
-    billingAddress: string
-  }
+  payment: Record<string, never>
 }
 
 export function useSignup() {
@@ -43,14 +36,7 @@ export function useSignup() {
     accountCreation: {
       platformOptions: []
     },
-    payment: {
-      plan: '',
-      cardNumber: '',
-      expiryDate: '',
-      cvv: '',
-      cardholderName: '',
-      billingAddress: ''
-    }
+    payment: {} as Record<string, never>
   })
 
   // Save initial signup attempt when user starts the process
@@ -112,14 +98,8 @@ export function useSignup() {
         completion_step: step
       }
 
-      // Add payment data if we're on the final step
+      // Mark as completed if we're on the final step
       if (step >= 3) {
-        updateData.selected_plan = formData.payment.plan
-        updateData.card_number = formData.payment.cardNumber
-        updateData.expiry_date = formData.payment.expiryDate
-        updateData.cvv = formData.payment.cvv
-        updateData.cardholder_name = formData.payment.cardholderName
-        updateData.billing_address = formData.payment.billingAddress
         updateData.status = 'completed'
       }
 
@@ -176,14 +156,7 @@ export function useSignup() {
     formData.accountCreation = {
       platformOptions: []
     }
-    formData.payment = {
-      plan: '',
-      cardNumber: '',
-      expiryDate: '',
-      cvv: '',
-      cardholderName: '',
-      billingAddress: ''
-    }
+    formData.payment = {} as Record<string, never>
     signupAttemptId.value = null
     error.value = null
   }

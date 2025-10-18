@@ -19,7 +19,6 @@ const {
   isLoading, 
   error, 
   signupAttemptId,
-  sessionId,
   createSignupAttempt, 
   updateSignupData, 
   completeSignup 
@@ -60,11 +59,7 @@ const validateCurrentStep = () => {
       }
     })
   } else if (activeStep.value === 3) {
-    if (!formData.payment.plan) errors.plan = 'Please select a plan'
-    if (!formData.payment.cardNumber) errors.cardNumber = 'Card number is required'
-    if (!formData.payment.expiryDate) errors.expiryDate = 'Expiry date is required'
-    if (!formData.payment.cvv) errors.cvv = 'CVV is required'
-    if (!formData.payment.cardholderName) errors.cardholderName = 'Cardholder name is required'
+    // No validation needed for payment step - it's just a review message
   }
   
   validationErrors.value = errors
