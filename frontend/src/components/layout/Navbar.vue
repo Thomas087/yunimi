@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import Button from 'primevue/button'
 
 const router = useRouter()
+const route = useRoute()
 
 // Navigation items
 const navItems = [
@@ -22,15 +23,24 @@ const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
 }
 
-// Smooth scroll to section
-const scrollToSection = (href: string) => {
-  const element = document.querySelector(href)
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    })
+// Smart navigation: smooth scroll if on landing page, navigate otherwise
+const navigateToSection = (href: string) => {
+  const isOnLandingPage = route.path === '/'
+  
+  if (isOnLandingPage) {
+    // If on landing page, smooth scroll to section
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  } else {
+    // If on another page, navigate to landing page with section
+    router.push(`/${href}`)
   }
+  
   // Close mobile menu after navigation
   isMobileMenuOpen.value = false
 }
@@ -38,6 +48,11 @@ const scrollToSection = (href: string) => {
 // Handle Get Started button
 const handleGetStarted = () => {
   router.push('/signup')
+}
+
+// Handle logo click - navigate to root
+const handleLogoClick = () => {
+  router.push('/')
 }
 
 // Toggle mobile menu
@@ -58,7 +73,7 @@ onUnmounted(() => {
   <nav class="navbar" :class="{ 'scrolled': isScrolled }">
     <div class="navbar-container">
       <!-- Logo -->
-      <div class="navbar-brand">
+      <div class="navbar-brand" @click="handleLogoClick">
         <h2>Yunimi</h2>
       </div>
 
@@ -68,7 +83,7 @@ onUnmounted(() => {
           v-for="item in navItems" 
           :key="item.href"
           :href="item.href"
-          @click.prevent="scrollToSection(item.href)"
+          @click.prevent="navigateToSection(item.href)"
           class="nav-link"
         >
           {{ item.label }}
@@ -103,7 +118,7 @@ onUnmounted(() => {
           v-for="item in navItems" 
           :key="item.href"
           :href="item.href"
-          @click.prevent="scrollToSection(item.href)"
+          @click.prevent="navigateToSection(item.href)"
           class="mobile-nav-link"
         >
           {{ item.label }}
@@ -144,6 +159,15 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   height: 70px;
+}
+
+.navbar-brand {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
 }
 
 .navbar-brand h2 {
