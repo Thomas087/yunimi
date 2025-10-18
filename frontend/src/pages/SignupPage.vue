@@ -147,10 +147,10 @@ const goBack = () => {
   <div class="signup-page">
     <Navbar />
     <div class="signup-container">
-      <div class="signup-header">
+      <!-- <div class="signup-header">
         <h1>Get Started with Yunimi</h1>
         <p>Complete your registration in just a few simple steps</p>
-      </div>
+      </div> -->
 
       <Card class="signup-card">
         <template #content>

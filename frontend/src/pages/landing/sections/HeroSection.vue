@@ -26,7 +26,6 @@ const handleGetStarted = () => {
           <Button 
             label="Get started" 
             size="large" 
-            class="primary-btn"
             @click="handleGetStarted"
           />
         </div>
@@ -46,8 +45,8 @@ const handleGetStarted = () => {
 
 <style scoped>
 .hero {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #1e293b;
   padding: 80px 20px;
   margin-top: 20px; /* Compensate for fixed navbar */
 }
@@ -86,7 +85,7 @@ const handleGetStarted = () => {
 .hero-subtitle {
   font-size: 1.25rem;
   margin-bottom: 2.5rem;
-  opacity: 0.9;
+  opacity: 0.7;
   line-height: 1.6;
 }
 
@@ -94,16 +93,6 @@ const handleGetStarted = () => {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-}
-
-.primary-btn {
-  background: #ff6b6b !important;
-  border-color: #ff6b6b !important;
-}
-
-.primary-btn:hover {
-  background: #ff5252 !important;
-  border-color: #ff5252 !important;
 }
 
 /* Responsive Design */
