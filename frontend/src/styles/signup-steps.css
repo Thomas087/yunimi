@@ -1,0 +1,170 @@
+/* Shared styles for signup steps */
+
+/* Step Header Styles */
+.signup-step-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.signup-step-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1e293b;
+}
+
+.signup-step-subtitle {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+  opacity: 0.7;
+  color: #1e293b;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Form Field Styles */
+.signup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.signup-field-label {
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.signup-form-input {
+  width: 100%;
+}
+
+.signup-form-input :deep(.p-inputtext) {
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.signup-form-input :deep(.p-inputtext:focus) {
+  border-color: var(--p-primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+
+.signup-form-input :deep(.p-inputtext:hover) {
+  border-color: #cbd5e1;
+}
+
+/* Dropdown Styles */
+.signup-dropdown {
+  width: 100%;
+}
+
+.signup-dropdown :deep(.p-dropdown) {
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.signup-dropdown :deep(.p-dropdown:not(.p-disabled):hover) {
+  border-color: #cbd5e1;
+}
+
+.signup-dropdown :deep(.p-dropdown:not(.p-disabled).p-focus) {
+  border-color: var(--p-primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.signup-dropdown :deep(.p-dropdown-label) {
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+}
+
+/* Input Group Styles */
+.signup-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.signup-input-prefix {
+  position: absolute;
+  left: 1rem;
+  color: #64748b;
+  font-weight: 500;
+  z-index: 1;
+  font-size: 1rem;
+}
+
+.signup-input-group :deep(.p-inputtext) {
+  padding-left: 2.5rem;
+}
+
+/* Card Styles */
+.signup-step-card {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.signup-step-card:hover {
+  border-color: var(--p-primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Error Message Styles */
+.signup-error-message {
+  margin-top: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .signup-step-title {
+    font-size: 2rem;
+  }
+  
+  .signup-step-subtitle {
+    font-size: 1rem;
+  }
+  
+  .signup-step-header {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-step-title {
+    font-size: 1.75rem;
+  }
+  
+  .signup-step-header {
+    margin-bottom: 2rem;
+  }
+  
+  .signup-step-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-step-title {
+    font-size: 1.5rem;
+  }
+  
+  .signup-step-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .signup-step-card {
+    padding: 1.25rem;
+  }
+}

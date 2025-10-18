@@ -58,9 +58,9 @@ const isPlatformSelected = (platformValue: string) => {
 
 <template>
   <div class="social-media-step">
-    <div class="step-header">
-      <h2 class="step-title">Social Media Selection</h2>
-      <p class="step-subtitle">Which Chinese social media platforms do you wish to publish to?</p>
+    <div class="signup-step-header">
+      <h2 class="signup-step-title">Social Media Selection</h2>
+      <p class="signup-step-subtitle">Which Chinese social media platforms do you wish to publish to?</p>
     </div>
 
     <div class="platform-selection">
@@ -68,7 +68,7 @@ const isPlatformSelected = (platformValue: string) => {
         <div 
           v-for="platform in socialMediaOptions" 
           :key="platform.value"
-          class="platform-card"
+          class="signup-step-card platform-card"
           :class="{ 'selected': isPlatformSelected(platform.value) }"
           @click="togglePlatform(platform.value)"
         >
@@ -97,7 +97,7 @@ const isPlatformSelected = (platformValue: string) => {
         v-if="errors.selectedPlatforms" 
         severity="error" 
         :closable="false"
-        class="error-message"
+        class="signup-error-message error-message"
       >
         {{ errors.selectedPlatforms }}
       </Message>
@@ -106,32 +106,10 @@ const isPlatformSelected = (platformValue: string) => {
 </template>
 
 <style scoped>
+@import '../../styles/signup-steps.css';
+
 .social-media-step {
   padding: 0;
-}
-
-.step-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.step-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  color: #1e293b;
-}
-
-.step-subtitle {
-  font-size: 1.1rem;
-  margin-bottom: 0;
-  opacity: 0.7;
-  line-height: 1.6;
-  color: #1e293b;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .platform-selection {
@@ -146,20 +124,12 @@ const isPlatformSelected = (platformValue: string) => {
 }
 
 .platform-card {
-  background: #ffffff;
-  border: 2px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .platform-card:hover {
-  border-color: var(--p-primary-color);
   transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .platform-card.selected {
@@ -217,41 +187,12 @@ const isPlatformSelected = (platformValue: string) => {
   opacity: 0.8;
 }
 
-.error-message {
-  margin-top: 1.5rem;
-}
 
 /* Responsive Design */
-@media (max-width: 968px) {
-  .step-title {
-    font-size: 2rem;
-  }
-  
-  .step-subtitle {
-    font-size: 1rem;
-  }
-  
-  .step-header {
-    margin-bottom: 2.5rem;
-  }
-}
-
 @media (max-width: 768px) {
   .platform-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-  }
-  
-  .platform-card {
-    padding: 1.5rem;
-  }
-  
-  .step-title {
-    font-size: 1.75rem;
-  }
-  
-  .step-header {
-    margin-bottom: 2rem;
   }
 }
 
@@ -264,18 +205,6 @@ const isPlatformSelected = (platformValue: string) => {
   
   .platform-checkbox {
     order: -1;
-  }
-  
-  .platform-card {
-    padding: 1.25rem;
-  }
-  
-  .step-title {
-    font-size: 1.5rem;
-  }
-  
-  .step-header {
-    margin-bottom: 1.5rem;
   }
   
   .platform-name {

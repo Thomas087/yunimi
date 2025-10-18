@@ -17,9 +17,9 @@ defineEmits<Emits>()
 
 <template>
   <div class="review-step">
-    <div class="step-header">
-      <h2 class="step-title">Account Review</h2>
-      <p class="step-subtitle">Your account is currently under review</p>
+    <div class="signup-step-header">
+      <h2 class="signup-step-title">Account Review</h2>
+      <p class="signup-step-subtitle">Your account is currently under review</p>
     </div>
 
     <div class="review-content">
@@ -40,28 +40,10 @@ defineEmits<Emits>()
 </template>
 
 <style scoped>
+@import '../../styles/signup-steps.css';
+
 .review-step {
   padding: 0;
-}
-
-.step-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.step-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.step-subtitle {
-  font-size: 1.1rem;
-  margin-bottom: 0;
-  opacity: 0.7;
-  color: #1e293b;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .review-content {
@@ -139,31 +121,9 @@ defineEmits<Emits>()
 }
 
 /* Responsive Design */
-@media (max-width: 968px) {
-  .step-title {
-    font-size: 1.3rem;
-  }
-  
-  .step-subtitle {
-    font-size: 1rem;
-  }
-  
-  .step-header {
-    margin-bottom: 2.5rem;
-  }
-}
-
 @media (max-width: 768px) {
   .review-text {
     font-size: 1rem;
-  }
-  
-  .step-title {
-    font-size: 1.2rem;
-  }
-  
-  .step-header {
-    margin-bottom: 2rem;
   }
   
   .review-icon {
@@ -179,14 +139,6 @@ defineEmits<Emits>()
 }
 
 @media (max-width: 480px) {
-  .step-title {
-    font-size: 1.1rem;
-  }
-  
-  .step-header {
-    margin-bottom: 1.5rem;
-  }
-  
   .review-text {
     font-size: 0.95rem;
   }

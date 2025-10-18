@@ -80,9 +80,9 @@ const getPlatformError = (platform: string) => {
 
 <template>
   <div class="account-creation-step">
-    <div class="step-header">
-      <h2 class="step-title">Account Creation</h2>
-      <p class="step-subtitle">Let us know about your social media accounts for the selected platforms</p>
+    <div class="signup-step-header">
+      <h2 class="signup-step-title">Account Creation</h2>
+      <p class="signup-step-subtitle">Let us know about your social media accounts for the selected platforms</p>
     </div>
 
     <div class="platform-accounts">
@@ -91,7 +91,7 @@ const getPlatformError = (platform: string) => {
         :key="platform"
         class="platform-account-card"
       >
-        <div class="account-card">
+        <div class="signup-step-card account-card">
           <div class="platform-header">
             <div class="platform-info">
               <PlatformIcon 
@@ -103,8 +103,8 @@ const getPlatformError = (platform: string) => {
             </div>
           </div>
           
-          <div class="account-option">
-            <label :for="`${platform}-option`" class="option-label">
+          <div class="signup-field account-option">
+            <label :for="`${platform}-option`" class="signup-field-label option-label">
               Account Status
             </label>
             <Dropdown
@@ -116,13 +116,13 @@ const getPlatformError = (platform: string) => {
               placeholder="Select an option"
               :class="{ 'p-invalid': getPlatformError(platform) }"
               @change="updatePlatformOption(platform, $event.value)"
-              class="account-dropdown"
+              class="signup-dropdown account-dropdown"
             />
             <Message 
               v-if="getPlatformError(platform)" 
               severity="error" 
               :closable="false"
-              class="error-message"
+              class="signup-error-message error-message"
             >
               {{ getPlatformError(platform) }}
             </Message>
@@ -134,32 +134,10 @@ const getPlatformError = (platform: string) => {
 </template>
 
 <style scoped>
+@import '../../styles/signup-steps.css';
+
 .account-creation-step {
   padding: 0;
-}
-
-.step-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.step-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  line-height: 1.2;
-  color: #1e293b;
-}
-
-.step-subtitle {
-  font-size: 1.1rem;
-  margin-bottom: 0;
-  opacity: 0.7;
-  line-height: 1.6;
-  color: #1e293b;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .platform-accounts {
@@ -171,21 +149,6 @@ const getPlatformError = (platform: string) => {
 
 .platform-account-card {
   width: 100%;
-}
-
-.account-card {
-  background: #ffffff;
-  border: 2px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.account-card:hover {
-  border-color: var(--p-primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .platform-header {
@@ -210,77 +173,10 @@ const getPlatformError = (platform: string) => {
   line-height: 1.3;
 }
 
-.account-option {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.option-label {
-  font-weight: 600;
-  color: #1e293b;
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
-}
-
-.account-dropdown {
-  width: 100%;
-}
-
-.account-dropdown :deep(.p-dropdown) {
-  border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.account-dropdown :deep(.p-dropdown:not(.p-disabled):hover) {
-  border-color: #cbd5e1;
-}
-
-.account-dropdown :deep(.p-dropdown:not(.p-disabled).p-focus) {
-  border-color: var(--p-primary-color);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.account-dropdown :deep(.p-dropdown-label) {
-  padding: 0.875rem 1rem;
-  font-size: 1rem;
-}
-
-.error-message {
-  margin-top: 0.5rem;
-}
-
 /* Responsive Design */
-@media (max-width: 968px) {
-  .step-title {
-    font-size: 2rem;
-  }
-  
-  .step-subtitle {
-    font-size: 1rem;
-  }
-  
-  .step-header {
-    margin-bottom: 2.5rem;
-  }
-}
-
 @media (max-width: 768px) {
   .platform-accounts {
     gap: 1.5rem;
-  }
-  
-  .account-card {
-    padding: 1.5rem;
-  }
-  
-  .step-title {
-    font-size: 1.75rem;
-  }
-  
-  .step-header {
-    margin-bottom: 2rem;
   }
   
   .platform-info {
@@ -291,18 +187,6 @@ const getPlatformError = (platform: string) => {
 }
 
 @media (max-width: 480px) {
-  .account-card {
-    padding: 1.25rem;
-  }
-  
-  .step-title {
-    font-size: 1.5rem;
-  }
-  
-  .step-header {
-    margin-bottom: 1.5rem;
-  }
-  
   .platform-info {
     text-align: center;
     align-items: center;
