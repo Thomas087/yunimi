@@ -2,10 +2,8 @@
 import { computed } from 'vue'
 import Dropdown from 'primevue/dropdown'
 import Message from 'primevue/message'
-import Card from 'primevue/card'
 import { getPlatformConfig } from '../../constants/platforms'
 import PlatformIcon from '../../components/shared/PlatformIcon.vue'
-import StepInfo from '../../components/shared/StepInfo.vue'
 
 interface PlatformAccountOption {
   platform: string
@@ -83,8 +81,8 @@ const getPlatformError = (platform: string) => {
 <template>
   <div class="account-creation-step">
     <div class="step-header">
-      <h2>Account Creation</h2>
-      <p>Let us know about your social media accounts for the selected platforms</p>
+      <h2 class="step-title">Account Creation</h2>
+      <p class="step-subtitle">Let us know about your social media accounts for the selected platforms</p>
     </div>
 
     <div class="platform-accounts">
@@ -93,87 +91,82 @@ const getPlatformError = (platform: string) => {
         :key="platform"
         class="platform-account-card"
       >
-        <Card class="account-card">
-          <template #content>
-            <div class="platform-header">
-              <div class="platform-info">
-                <PlatformIcon 
-                  :platform="platform" 
-                  size="medium"
-                  :useImage="true"
-                />
-                <h3 class="platform-name">{{ getPlatformLabel(platform) }}</h3>
-              </div>
-            </div>
-            
-            <div class="account-option">
-              <label :for="`${platform}-option`" class="option-label">
-                Account Status
-              </label>
-              <Dropdown
-                :id="`${platform}-option`"
-                :modelValue="getPlatformOption(platform)"
-                :options="accountOptions"
-                optionLabel="label"
-                optionValue="value"
-                placeholder="Select an option"
-                :class="{ 'p-invalid': getPlatformError(platform) }"
-                @change="updatePlatformOption(platform, $event.value)"
-                class="account-dropdown"
+        <div class="account-card">
+          <div class="platform-header">
+            <div class="platform-info">
+              <PlatformIcon 
+                :platform="platform" 
+                size="medium"
+                :useImage="true"
               />
-              <Message 
-                v-if="getPlatformError(platform)" 
-                severity="error" 
-                :closable="false"
-                class="error-message"
-              >
-                {{ getPlatformError(platform) }}
-              </Message>
+              <h3 class="platform-name">{{ getPlatformLabel(platform) }}</h3>
             </div>
-          </template>
-        </Card>
+          </div>
+          
+          <div class="account-option">
+            <label :for="`${platform}-option`" class="option-label">
+              Account Status
+            </label>
+            <Dropdown
+              :id="`${platform}-option`"
+              :modelValue="getPlatformOption(platform)"
+              :options="accountOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select an option"
+              :class="{ 'p-invalid': getPlatformError(platform) }"
+              @change="updatePlatformOption(platform, $event.value)"
+              class="account-dropdown"
+            />
+            <Message 
+              v-if="getPlatformError(platform)" 
+              severity="error" 
+              :closable="false"
+              class="error-message"
+            >
+              {{ getPlatformError(platform) }}
+            </Message>
+          </div>
+        </div>
       </div>
     </div>
-
-    <StepInfo
-      title="Account Creation Options"
-      :items="[
-        '<strong>I already have an account:</strong> We\'ll help you connect your existing account',
-        '<strong>I\'ll create an account myself:</strong> You\'ll handle account creation independently',
-        '<strong>I need help creating an account:</strong> Our team will guide you through the process'
-      ]"
-      variant="warning"
-    />
   </div>
 </template>
 
 <style scoped>
 .account-creation-step {
-  padding: 1rem 0;
+  padding: 0;
 }
 
 .step-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
-.step-header h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+.step-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #1e293b;
 }
 
-.step-header p {
-  color: #7f8c8d;
-  font-size: 1rem;
+.step-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+  opacity: 0.7;
+  line-height: 1.6;
+  color: #1e293b;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .platform-accounts {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin-bottom: 0;
 }
 
 .platform-account-card {
@@ -181,83 +174,146 @@ const getPlatformError = (platform: string) => {
 }
 
 .account-card {
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .account-card:hover {
-  border-color: var(--p-primary-300);
-  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+  border-color: var(--p-primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .platform-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .platform-info {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .platform-icon {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .platform-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e293b;
   margin: 0;
+  line-height: 1.3;
 }
 
 .account-option {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .option-label {
-  font-weight: 500;
-  color: #2c3e50;
-  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
 }
 
 .account-dropdown {
   width: 100%;
 }
 
-.error-message {
-  margin-top: 0.25rem;
+.account-dropdown :deep(.p-dropdown) {
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
+.account-dropdown :deep(.p-dropdown:not(.p-disabled):hover) {
+  border-color: #cbd5e1;
+}
+
+.account-dropdown :deep(.p-dropdown:not(.p-disabled).p-focus) {
+  border-color: var(--p-primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.account-dropdown :deep(.p-dropdown-label) {
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+}
+
+.error-message {
+  margin-top: 0.5rem;
+}
 
 /* Responsive Design */
+@media (max-width: 968px) {
+  .step-title {
+    font-size: 2rem;
+  }
+  
+  .step-subtitle {
+    font-size: 1rem;
+  }
+  
+  .step-header {
+    margin-bottom: 2.5rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .step-header h2 {
-    font-size: 1.5rem;
-  }
-  
   .platform-accounts {
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
   
+  .account-card {
+    padding: 1.5rem;
+  }
+  
+  .step-title {
+    font-size: 1.75rem;
+  }
+  
+  .step-header {
+    margin-bottom: 2rem;
+  }
   
   .platform-info {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 }
 
 @media (max-width: 480px) {
+  .account-card {
+    padding: 1.25rem;
+  }
+  
+  .step-title {
+    font-size: 1.5rem;
+  }
+  
+  .step-header {
+    margin-bottom: 1.5rem;
+  }
+  
   .platform-info {
     text-align: center;
+    align-items: center;
   }
   
   .platform-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+  
+  .platform-name {
+    font-size: 1.2rem;
   }
 }
 </style>

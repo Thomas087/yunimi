@@ -4,7 +4,6 @@ import Checkbox from 'primevue/checkbox'
 import Message from 'primevue/message'
 import { PLATFORM_CONFIGS } from '../../constants/platforms'
 import PlatformIcon from '../../components/shared/PlatformIcon.vue'
-import StepInfo from '../../components/shared/StepInfo.vue'
 
 interface SocialMediaData {
   selectedPlatforms: string[]
@@ -60,8 +59,8 @@ const isPlatformSelected = (platformValue: string) => {
 <template>
   <div class="social-media-step">
     <div class="step-header">
-      <h2>Social Media Selection</h2>
-      <p>Which Chinese social media platforms do you wish to publish to?</p>
+      <h2 class="step-title">Social Media Selection</h2>
+      <p class="step-subtitle">Which Chinese social media platforms do you wish to publish to?</p>
     </div>
 
     <div class="platform-selection">
@@ -103,73 +102,71 @@ const isPlatformSelected = (platformValue: string) => {
         {{ errors.selectedPlatforms }}
       </Message>
     </div>
-
-    <StepInfo
-      title="Why select social media platforms?"
-      :items="[
-        'We\'ll help you optimize content for each platform\'s unique audience',
-        'Different platforms have different content formats and best practices',
-        'You can always add or remove platforms later in your account settings',
-        'Each platform offers different engagement and reach opportunities'
-      ]"
-      variant="info"
-    />
   </div>
 </template>
 
 <style scoped>
 .social-media-step {
-  padding: 1rem 0;
+  padding: 0;
 }
 
 .step-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
-.step-header h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+.step-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: #1e293b;
 }
 
-.step-header p {
-  color: #7f8c8d;
-  font-size: 1rem;
+.step-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+  opacity: 0.7;
+  line-height: 1.6;
+  color: #1e293b;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .platform-selection {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .platform-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
   margin-bottom: 1rem;
 }
 
 .platform-card {
-  background: #fff;
-  border: 2px solid var(--p-primary-100);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .platform-card:hover {
-  border-color: var(--p-primary-300);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--p-primary-300);
+  border-color: var(--p-primary-color);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .platform-card.selected {
   border-color: var(--p-primary-color);
-  background-color: var(--surface-hover);
-  box-shadow: 0 4px 12px var(--p-primary-color);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .platform-content {
@@ -180,62 +177,113 @@ const isPlatformSelected = (platformValue: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .platform-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .platform-checkbox {
   margin: 0;
 }
 
+.platform-checkbox :deep(.p-checkbox-box) {
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.platform-checkbox :deep(.p-checkbox-box.p-highlight) {
+  background: var(--p-primary-color);
+  border-color: var(--p-primary-color);
+}
+
 .platform-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
 }
 
 .platform-description {
-  color: #6c757d;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.5;
   margin: 0;
+  opacity: 0.8;
 }
 
 .error-message {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
-
 /* Responsive Design */
-@media (max-width: 768px) {
-  .step-header h2 {
-    font-size: 1.5rem;
+@media (max-width: 968px) {
+  .step-title {
+    font-size: 2rem;
   }
   
+  .step-subtitle {
+    font-size: 1rem;
+  }
+  
+  .step-header {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
   .platform-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .platform-card {
+    padding: 1.5rem;
+  }
+  
+  .step-title {
+    font-size: 1.75rem;
+  }
+  
+  .step-header {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .platform-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  
+  .platform-checkbox {
+    order: -1;
   }
   
   .platform-card {
     padding: 1.25rem;
   }
   
-}
-
-@media (max-width: 480px) {
-  .platform-header {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
+  .step-title {
+    font-size: 1.5rem;
   }
   
-  .platform-checkbox {
-    order: -1;
+  .step-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .platform-name {
+    font-size: 1.2rem;
+  }
+  
+  .platform-description {
+    font-size: 0.9rem;
   }
 }
 </style>

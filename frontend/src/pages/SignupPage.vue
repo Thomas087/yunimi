@@ -3,7 +3,6 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Steps from 'primevue/steps'
 import Button from 'primevue/button'
-import Card from 'primevue/card'
 import Message from 'primevue/message'
 import Navbar from '../components/layout/Navbar.vue'
 import CompanyInformationStep from './signup/CompanyInformationStep.vue'
@@ -147,58 +146,56 @@ const goBack = () => {
   <div class="signup-page">
     <Navbar />
     <div class="signup-container">
-      <!-- <div class="signup-header">
-        <h1>Get Started with Yunimi</h1>
-        <p>Complete your registration in just a few simple steps</p>
-      </div> -->
+      <div class="signup-header">
+        <h1 class="section-title">Get Started with Yunimi</h1>
+        <p class="section-subtitle">Complete your registration in just a few simple steps</p>
+      </div>
 
-      <Card class="signup-card">
-        <template #content>
-          <!-- Error Message -->
-          <Message 
-            v-if="error" 
-            severity="error" 
-            :closable="true"
-            @close="error = null"
-            class="error-message"
-          >
-            {{ error }}
-          </Message>
-          
-          <Steps 
-            :model="steps" 
-            :activeStep="activeStep"
-            class="signup-steps"
+      <div class="signup-card">
+        <!-- Error Message -->
+        <Message 
+          v-if="error" 
+          severity="error" 
+          :closable="true"
+          @close="error = null"
+          class="error-message"
+        >
+          {{ error }}
+        </Message>
+        
+        <Steps 
+          :model="steps" 
+          :activeStep="activeStep"
+          class="signup-steps"
+        />
+        
+        <div class="step-content">
+          <CompanyInformationStep 
+            v-if="activeStep === 0"
+            v-model="formData.company"
+            :errors="validationErrors"
           />
           
-          <div class="step-content">
-            <CompanyInformationStep 
-              v-if="activeStep === 0"
-              v-model="formData.company"
-              :errors="validationErrors"
-            />
-            
-            <SocialMediaSelectionStep 
-              v-if="activeStep === 1"
-              v-model="formData.socialMedia"
-              :errors="validationErrors"
-            />
-            
-            <AccountCreationStep 
-              v-if="activeStep === 2"
-              v-model="formData.accountCreation"
-              :errors="validationErrors"
-              :selectedPlatforms="formData.socialMedia.selectedPlatforms"
-            />
-            
-            <PaymentStep 
-              v-if="activeStep === 3"
-              v-model="formData.payment"
-              :errors="validationErrors"
-            />
-          </div>
-        </template>
-      </Card>
+          <SocialMediaSelectionStep 
+            v-if="activeStep === 1"
+            v-model="formData.socialMedia"
+            :errors="validationErrors"
+          />
+          
+          <AccountCreationStep 
+            v-if="activeStep === 2"
+            v-model="formData.accountCreation"
+            :errors="validationErrors"
+            :selectedPlatforms="formData.socialMedia.selectedPlatforms"
+          />
+          
+          <PaymentStep 
+            v-if="activeStep === 3"
+            v-model="formData.payment"
+            :errors="validationErrors"
+          />
+        </div>
+      </div>
 
       <!-- Fixed Bottom Navigation Bar -->
       <div class="bottom-navigation">
@@ -236,38 +233,36 @@ const goBack = () => {
 <style scoped>
 .signup-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #1e293b;
+  padding: 80px 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .signup-container {
   max-width: 800px;
   margin: 0 auto;
-  margin-top: 70px; /* Compensate for fixed navbar */
+  margin-top: 0px; /* Compensate for fixed navbar */
 }
 
 .signup-header {
   text-align: center;
   margin-bottom: 2rem;
 }
-
-.signup-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
-}
-
-.signup-header p {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-}
-
 .signup-card {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.signup-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--p-primary-color);
 }
 
 .error-message {
@@ -290,7 +285,7 @@ const goBack = () => {
   left: 0;
   right: 0;
   background: white;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid #e2e8f0;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
@@ -313,22 +308,36 @@ const goBack = () => {
   gap: 1rem;
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media (max-width: 968px) {
   .signup-page {
-    padding: 1rem;
+    padding: 60px 20px;
   }
   
-  .signup-header h1 {
+  .section-title {
+    font-size: 2.5rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .signup-header {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-page {
+    padding: 50px 20px;
+  }
+  
+  .section-title {
     font-size: 2rem;
   }
   
-  .signup-header p {
-    font-size: 1rem;
-  }
-  
-  .signup-card :deep(.p-card-content) {
-    padding: 1rem;
+  .signup-card {
+    padding: 2rem;
   }
   
   .step-content {
@@ -344,23 +353,27 @@ const goBack = () => {
   .right-actions {
     gap: 0.5rem;
   }
+
+  .signup-container {
+    margin-top: 70px;
+  }
 }
 
 @media (max-width: 480px) {
   .signup-page {
-    padding: 0.75rem;
+    padding: 40px 20px;
   }
   
-  .signup-header h1 {
+  .section-title {
     font-size: 1.75rem;
   }
   
-  .signup-header p {
-    font-size: 0.9rem;
+  .signup-header {
+    margin-bottom: 2.5rem;
   }
   
-  .signup-card :deep(.p-card-content) {
-    padding: 0.75rem;
+  .signup-card {
+    padding: 1.5rem;
   }
   
   .step-content {
