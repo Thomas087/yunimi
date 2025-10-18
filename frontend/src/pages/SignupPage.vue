@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Steps from 'primevue/steps'
 import Button from 'primevue/button'
@@ -26,12 +26,36 @@ const {
 
 // Step management
 const activeStep = ref(0)
-const steps = [
-  { label: 'Company Info' },
-  { label: 'Social Media' },
-  { label: 'Account Creation' },
-  { label: 'Payment' }
+const stepLabels = [
+  'Company Info',
+  'Social Media',
+  'Account Creation',
+  'Payment'
 ]
+
+// Screen size tracking
+const windowWidth = ref(window.innerWidth)
+const isMobile = computed(() => windowWidth.value <= 768)
+
+// Update window width on resize
+const updateWindowWidth = () => {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', updateWindowWidth)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', updateWindowWidth)
+})
+
+// Computed property to show labels based on screen size and active step
+const steps = computed(() => {
+  return stepLabels.map((label, index) => ({
+    label: isMobile.value ? (index === activeStep.value ? label : '') : label
+  }))
+})
 
 // Validation state
 const validationErrors = ref<Record<string, string>>({})
@@ -77,7 +101,7 @@ const nextStep = async () => {
       // Save current step data to Supabase (step 0 becomes step 1 in database)
       await updateSignupData(activeStep.value + 1)
       
-      if (activeStep.value < steps.length - 1) {
+      if (activeStep.value < stepLabels.length - 1) {
         activeStep.value++
       } else {
         // Complete signup (step 3 becomes step 4 in database)
@@ -87,7 +111,7 @@ const nextStep = async () => {
     } catch (err) {
       console.error('Failed to save signup data:', err)
       // Continue with the step even if saving fails
-      if (activeStep.value < steps.length - 1) {
+      if (activeStep.value < stepLabels.length - 1) {
         activeStep.value++
       } else {
         router.push('/')
@@ -176,9 +200,9 @@ const goBack = () => {
 
       <!-- Fixed Bottom Navigation Bar -->
       <div class="bottom-navigation">
-        <div class="nav-container" :class="{ 'single-button': activeStep === steps.length - 1 }">
+        <div class="nav-container" :class="{ 'single-button': activeStep === stepLabels.length - 1 }">
           <Button 
-            v-if="activeStep !== steps.length - 1"
+            v-if="activeStep !== stepLabels.length - 1"
             label="Back" 
             severity="secondary" 
             outlined
@@ -188,14 +212,14 @@ const goBack = () => {
           
           <div class="right-actions">
             <Button 
-              v-if="activeStep !== steps.length - 1"
+              v-if="activeStep !== stepLabels.length - 1"
               label="Cancel" 
               severity="secondary" 
               text
               @click="goBack"
             />
             <Button 
-              :label="activeStep === steps.length - 1 ? 'Complete Signup' : 'Next'"
+              :label="activeStep === stepLabels.length - 1 ? 'Complete Signup' : 'Next'"
               @click="nextStep"
               :loading="isLoading"
               :disabled="isLoading"
