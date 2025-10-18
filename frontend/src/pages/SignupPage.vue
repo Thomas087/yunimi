@@ -5,6 +5,7 @@ import Steps from 'primevue/steps'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Message from 'primevue/message'
+import Navbar from '../components/layout/Navbar.vue'
 import CompanyInformationStep from './signup/CompanyInformationStep.vue'
 import SocialMediaSelectionStep from './signup/SocialMediaSelectionStep.vue'
 import AccountCreationStep from './signup/AccountCreationStep.vue'
@@ -144,6 +145,7 @@ const goBack = () => {
 
 <template>
   <div class="signup-page">
+    <Navbar />
     <div class="signup-container">
       <div class="signup-header">
         <h1>Get Started with Yunimi</h1>
@@ -242,6 +244,7 @@ const goBack = () => {
 .signup-container {
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 70px; /* Compensate for fixed navbar */
 }
 
 .signup-header {

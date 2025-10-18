@@ -6,6 +6,10 @@ const router = useRouter()
 
 const handleGetStarted = () => {
   router.push('/signup')
+  // Ensure we scroll to top after navigation
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, 100)
 }
 
 const handleLearnMore = () => {

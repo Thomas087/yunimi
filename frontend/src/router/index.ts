@@ -36,6 +36,19 @@ const router = createRouter({
       component: SignupPage
     }
   ],
+  scrollBehavior(to, from, savedPosition) {
+    // Always scroll to top when navigating between different pages
+    if (to.path !== from.path) {
+      return { top: 0, behavior: 'smooth' }
+    }
+    
+    // For section navigation within the same page, use saved position or scroll to top
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0, behavior: 'smooth' }
+    }
+  }
 })
 
 // Navigation guard to handle section scrolling

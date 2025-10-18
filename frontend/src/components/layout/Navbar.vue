@@ -8,9 +8,9 @@ const route = useRoute()
 
 // Navigation items
 const navItems = [
-  { label: 'Accueil', href: '#hero' },
-  { label: 'Fonctionnalités', href: '#features' },
-  { label: 'À propos', href: '#about' },
+  { label: 'Home', href: '#hero' },
+  { label: 'Features', href: '#features' },
+  { label: 'About us', href: '#about' },
   { label: 'Contact', href: '#contact' }
 ]
 
@@ -48,11 +48,19 @@ const navigateToSection = (href: string) => {
 // Handle Get Started button
 const handleGetStarted = () => {
   router.push('/signup')
+  // Ensure we scroll to top after navigation
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, 100)
 }
 
-// Handle logo click - navigate to root
+// Handle logo click - navigate to root and scroll to top
 const handleLogoClick = () => {
   router.push('/')
+  // Ensure we scroll to top after navigation
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, 100)
 }
 
 // Toggle mobile menu
