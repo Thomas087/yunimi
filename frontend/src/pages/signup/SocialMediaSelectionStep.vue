@@ -84,7 +84,6 @@ const isPlatformSelected = (platformValue: string) => {
                 :binary="true"
                 @change="togglePlatform(platform.value, $event)"
                 @click.stop
-                class="platform-checkbox"
               />
             </div>
             <h3 class="platform-name">{{ platform.label }}</h3>
@@ -154,23 +153,6 @@ const isPlatformSelected = (platformValue: string) => {
   font-size: 2.5rem;
 }
 
-.platform-checkbox {
-  margin: 0;
-}
-
-.platform-checkbox :deep(.p-checkbox-box) {
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  width: 1.5rem;
-  height: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.platform-checkbox :deep(.p-checkbox-box.p-highlight) {
-  background: var(--p-primary-color);
-  border-color: var(--p-primary-color);
-}
-
 .platform-name {
   font-size: 1.3rem;
   font-weight: 700;
@@ -201,10 +183,6 @@ const isPlatformSelected = (platformValue: string) => {
     flex-direction: column;
     gap: 0.75rem;
     align-items: center;
-  }
-  
-  .platform-checkbox {
-    order: -1;
   }
   
   .platform-name {
