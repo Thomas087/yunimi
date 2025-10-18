@@ -46,6 +46,9 @@ const getPlatformLabel = (platformValue: string): string => {
 }
 
 const updatePlatformOption = (platform: string, option: string) => {
+  console.log('updatePlatformOption called with:', { platform, option })
+  console.log('Current platformOptions before update:', accountCreationData.value.platformOptions)
+  
   const currentOptions = [...accountCreationData.value.platformOptions]
   const existingIndex = currentOptions.findIndex(item => item.platform === platform)
   
@@ -57,10 +60,14 @@ const updatePlatformOption = (platform: string, option: string) => {
     currentOptions.push({ platform, option })
   }
   
+  console.log('Updated platformOptions:', currentOptions)
+  
   accountCreationData.value = {
     ...accountCreationData.value,
     platformOptions: currentOptions
   }
+  
+  console.log('Final accountCreationData.value:', accountCreationData.value)
 }
 
 const getPlatformOption = (platform: string) => {

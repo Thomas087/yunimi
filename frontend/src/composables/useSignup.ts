@@ -85,16 +85,23 @@ export function useSignup() {
       isLoading.value = true
       error.value = null
 
+      // Debug logging for account creation data
+      console.log('updateSignupData - formData.accountCreation.platformOptions:', formData.accountCreation.platformOptions)
+      
+      const platformOptionsObject = formData.accountCreation.platformOptions.reduce((acc, option) => {
+        acc[option.platform] = option.option
+        return acc
+      }, {} as Record<string, string>)
+      
+      console.log('updateSignupData - transformed platform_options:', platformOptionsObject)
+
       const updateData: Partial<SignupAttempt> = {
         professional_email: formData.company.professionalEmail,
         company_name: formData.company.name,
         website_url: formData.company.website,
         instagram_account: formData.company.instagram,
         selected_platforms: formData.socialMedia.selectedPlatforms,
-        platform_options: formData.accountCreation.platformOptions.reduce((acc, option) => {
-          acc[option.platform] = option.option
-          return acc
-        }, {} as Record<string, string>),
+        platform_options: platformOptionsObject,
         completion_step: step
       }
 
