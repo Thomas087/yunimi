@@ -101,6 +101,7 @@ onUnmounted(() => {
       <!-- Get Started Button -->
       <div class="navbar-actions">
         <Button 
+          v-show="route.path !== '/signup'"
           label="Get Started" 
           class="get-started-btn"
           @click="handleGetStarted"
@@ -132,6 +133,7 @@ onUnmounted(() => {
           {{ item.label }}
         </a>
         <Button 
+          v-show="route.path !== '/signup'"
           label="Get Started" 
           class="mobile-get-started-btn"
           @click="handleGetStarted"
