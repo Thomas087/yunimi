@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Divider from "primevue/divider"
 import Container from '../../../components/layout/Container.vue'
 </script>
 
@@ -7,38 +6,37 @@ import Container from '../../../components/layout/Container.vue'
   <footer id="contact" class="footer">
     <Container>
       <div class="footer-content">
-        <div class="footer-section">
-          <h4>Yunimi</h4>
-          <p>Building the future, one solution at a time.</p>
+        <div class="footer-main">
+          <div class="footer-brand">
+            <h3 class="brand-name">Yunimi</h3>
+            <p class="brand-tagline">Making your brand visible to Chinese consumers.</p>
+          </div>
+          
+          <div class="footer-links">
+            <div class="link-group">
+              <h5>Product</h5>
+              <a href="#features">Features</a>
+              <a href="#pricing">Pricing</a>
+              <a href="#">Documentation</a>
+            </div>
+            <div class="link-group">
+              <h5>Company</h5>
+              <a href="#about">About</a>
+              <a href="#">Blog</a>
+              <a href="#">Careers</a>
+            </div>
+            <div class="link-group">
+              <h5>Support</h5>
+              <a href="#">Help Center</a>
+              <a href="#contact">Contact</a>
+              <a href="#">Status</a>
+            </div>
+          </div>
         </div>
-        <div class="footer-section">
-          <h5>Product</h5>
-          <ul>
-            <li><a href="#">Features</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Documentation</a></li>
-          </ul>
+        
+        <div class="footer-bottom">
+          <p>&copy; 2024 Yunimi. All rights reserved.</p>
         </div>
-        <div class="footer-section">
-          <h5>Company</h5>
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h5>Support</h5>
-          <ul>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Status</a></li>
-          </ul>
-        </div>
-      </div>
-      <Divider />
-      <div class="footer-bottom">
-        <p>&copy; 2024 Yunimi. All rights reserved.</p>
       </div>
     </Container>
   </footer>
@@ -46,58 +44,141 @@ import Container from '../../../components/layout/Container.vue'
 
 <style scoped>
 .footer {
-  background: #2c3e50;
-  color: white;
-  padding: 60px 20px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  color: #1e293b;
+  padding: 60px 20px 40px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 2rem;
+  gap: 3rem;
 }
 
-.footer-section h4 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: #667eea;
+.footer-brand {
+  flex: 1;
+  max-width: 400px;
 }
 
-.footer-section h5 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #1e293b;
+  line-height: 1.2;
 }
 
-.footer-section p {
-  color: #bdc3c7;
+.brand-tagline {
+  font-size: 1rem;
+  color: #64748b;
   line-height: 1.6;
+  margin: 0;
 }
 
-.footer-section ul {
-  list-style: none;
-  padding: 0;
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.footer-section ul li {
-  margin-bottom: 0.5rem;
+.link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 120px;
 }
 
-.footer-section ul li a {
-  color: #bdc3c7;
+.link-group h5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.link-group a {
+  color: #64748b;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+  line-height: 1.5;
 }
 
-.footer-section ul li a:hover {
-  color: #667eea;
+.link-group a:hover {
+  color: #1e293b;
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
-  color: #bdc3c7;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .footer {
+    padding: 50px 20px 30px;
+  }
+  
+  .footer-main {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .footer-links {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px 30px;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .link-group {
+    min-width: auto;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 20px 25px;
+  }
+  
+  .footer-main {
+    gap: 2rem;
+  }
+  
+  .brand-name {
+    font-size: 1.375rem;
+  }
+  
+  .brand-tagline {
+    font-size: 0.95rem;
+  }
 }
 </style>
