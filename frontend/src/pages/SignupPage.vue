@@ -103,6 +103,8 @@ const nextStep = async () => {
       
       if (activeStep.value < stepLabels.length - 1) {
         activeStep.value++
+        // Scroll to top when moving to next step
+        window.scrollTo(0, 0)
       } else {
         // Complete signup (step 3 becomes step 4 in database)
         await completeSignup()
@@ -113,6 +115,8 @@ const nextStep = async () => {
       // Continue with the step even if saving fails
       if (activeStep.value < stepLabels.length - 1) {
         activeStep.value++
+        // Scroll to top when moving to next step
+        window.scrollTo(0, 0)
       } else {
         router.push('/')
       }
@@ -123,6 +127,8 @@ const nextStep = async () => {
 const prevStep = () => {
   if (activeStep.value > 0) {
     activeStep.value--
+    // Scroll to top when moving to previous step
+    window.scrollTo(0, 0)
   }
 }
 
