@@ -2,6 +2,7 @@
 import Navbar from '../components/layout/Navbar.vue'
 import HeroSection from './landing/sections/HeroSection.vue'
 import FeaturesSection from './landing/sections/FeaturesSection.vue'
+import PricingSection from './landing/sections/PricingSection.vue'
 import AboutSection from './landing/sections/AboutSection.vue'
 import FooterSection from './landing/sections/FooterSection.vue'
 import Divider from "primevue/divider"
@@ -12,6 +13,7 @@ import Divider from "primevue/divider"
     <Navbar />
     <HeroSection />
     <FeaturesSection />
+    <PricingSection />
     <Divider />
     <AboutSection />
     <FooterSection />
