@@ -11,34 +11,33 @@ const handleGetStarted = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, 100)
 }
-
-const handleLearnMore = () => {
-  console.log('Learn More clicked')
-  // Add your navigation logic here
-}
 </script>
 
 <template>
   <section id="hero" class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">Welcome to Yunimi</h1>
-      <p class="hero-subtitle">
-        The modern solution for your business needs. Streamline your workflow, 
-        boost productivity, and achieve your goals with our innovative platform.
-      </p>
-      <div class="hero-actions">
-        <Button 
-          label="Get Started" 
-          size="large" 
-          class="primary-btn"
-          @click="handleGetStarted"
-        />
-        <Button 
-          label="Learn More" 
-          size="large" 
-          severity="secondary"
-          outlined
-          @click="handleLearnMore"
+    <div class="hero-container">
+      <!-- Left Panel: Text + Button -->
+      <div class="hero-left">
+        <h1 class="hero-title">One-click translation & publishing for China's biggest social media</h1>
+        <p class="hero-subtitle">
+          Expand your brand presence on WeChat, Douyin, Red, Weibo & beyond
+        </p>
+        <div class="hero-actions">
+          <Button 
+            label="Get started" 
+            size="large" 
+            class="primary-btn"
+            @click="handleGetStarted"
+          />
+        </div>
+      </div>
+      
+      <!-- Right Panel: Hero Image -->
+      <div class="hero-right">
+        <img 
+          src="/images/landing/hero-pic-1.png" 
+          alt="Hero illustration" 
+          class="hero-image"
         />
       </div>
     </div>
@@ -49,14 +48,32 @@ const handleLearnMore = () => {
 .hero {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 120px 20px;
-  text-align: center;
-  margin-top: 70px; /* Compensate for fixed navbar */
+  padding: 80px 20px;
+  margin-top: 20px; /* Compensate for fixed navbar */
 }
 
-.hero-content {
-  max-width: 800px;
+.hero-container {
+  max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-left {
+  text-align: left;
+}
+
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
 }
 
 .hero-title {
@@ -76,7 +93,6 @@ const handleLearnMore = () => {
 .hero-actions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -91,6 +107,22 @@ const handleLearnMore = () => {
 }
 
 /* Responsive Design */
+@media (max-width: 968px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .hero-left {
+    text-align: center;
+  }
+  
+  .hero-actions {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
@@ -108,11 +140,15 @@ const handleLearnMore = () => {
 
 @media (max-width: 480px) {
   .hero {
-    padding: 80px 20px;
+    padding: 0px 20px;
   }
   
   .hero-title {
     font-size: 2rem;
+  }
+  
+  .hero-container {
+    gap: 2rem;
   }
 }
 </style>
