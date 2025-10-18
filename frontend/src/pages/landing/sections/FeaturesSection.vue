@@ -24,7 +24,7 @@ const features = ref([
 </script>
 
 <template>
-  <Section background="#f8f9fa">
+  <Section id="features" background="#f8f9fa">
     <Container>
       <h2 class="section-title">Why Choose Yunimi?</h2>
       <p class="section-subtitle">

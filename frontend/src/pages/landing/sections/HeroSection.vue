@@ -15,7 +15,7 @@ const handleLearnMore = () => {
 </script>
 
 <template>
-  <section class="hero">
+  <section id="hero" class="hero">
     <div class="hero-content">
       <h1 class="hero-title">Welcome to Yunimi</h1>
       <p class="hero-subtitle">
@@ -47,6 +47,7 @@ const handleLearnMore = () => {
   color: white;
   padding: 120px 20px;
   text-align: center;
+  margin-top: 70px; /* Compensate for fixed navbar */
 }
 
 .hero-content {

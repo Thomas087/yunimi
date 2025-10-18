@@ -4,7 +4,7 @@ import Container from '../../../components/layout/Container.vue'
 </script>
 
 <template>
-  <footer class="footer">
+  <footer id="contact" class="footer">
     <Container>
       <div class="footer-content">
         <div class="footer-section">

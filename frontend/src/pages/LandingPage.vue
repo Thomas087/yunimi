@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Navbar from '../components/layout/Navbar.vue'
 import HeroSection from './landing/sections/HeroSection.vue'
 import FeaturesSection from './landing/sections/FeaturesSection.vue'
 import AboutSection from './landing/sections/AboutSection.vue'
@@ -8,6 +9,7 @@ import Divider from "primevue/divider"
 
 <template>
   <div class="landing-page">
+    <Navbar />
     <HeroSection />
     <FeaturesSection />
     <Divider />

@@ -11,7 +11,7 @@ const handleContact = () => {
 </script>
 
 <template>
-  <Section>
+  <Section id="about">
     <Container>
       <div class="about-content">
         <div class="about-text">
