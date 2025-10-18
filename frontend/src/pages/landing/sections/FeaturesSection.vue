@@ -6,19 +6,19 @@ import { ref } from 'vue'
 
 const features = ref([
   {
-    title: "Fast & Reliable",
-    description: "Built with modern technology for optimal performance and reliability.",
-    icon: "⚡"
+    title: "AI-powered Translation",
+    description: "We translate your content into Chinese using A.I. for Chinese users to see.",
+    icon: "/images/landing/features/ai.svg"
   },
   {
-    title: "Easy to Use",
-    description: "Intuitive interface designed for both beginners and experts.",
-    icon: "🎯"
+    title: "Automated Publishing",
+    description: "We publish your content to WeChat, Douyin, Red, Weibo & beyond automatically.",
+    icon: "/images/landing/features/publication.svg"
   },
   {
-    title: "Secure",
-    description: "Enterprise-grade security to protect your data and privacy.",
-    icon: "🔒"
+    title: "Human review",
+    description: "We review your content to ensure it meets brand guidelines and follows Chinese regulations.",
+    icon: "/images/landing/features/verification.svg"
   }
 ])
 </script>
@@ -26,9 +26,9 @@ const features = ref([
 <template>
   <Section id="features" background="#f8f9fa">
     <Container>
-      <h2 class="section-title">Why Choose Yunimi?</h2>
+      <h2 class="section-title">Easily promote your brand in China</h2>
       <p class="section-subtitle">
-        Discover the features that make us the preferred choice for businesses worldwide.
+        We make all of your social media content visible to Chinese users.
       </p>
       <div class="features-grid">
         <FeatureCard 

@@ -13,7 +13,9 @@ defineProps<Props>()
 <template>
   <Card class="feature-card">
     <template #header>
-      <div class="feature-icon">{{ icon }}</div>
+      <div class="feature-icon">
+        <img :src="icon" :alt="title" class="icon-image" />
+      </div>
     </template>
     <template #title>
       <h3>{{ title }}</h3>
@@ -39,8 +41,16 @@ defineProps<Props>()
 }
 
 .feature-icon {
-  font-size: 3rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-image {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
 }
 
 .feature-card h3 {
