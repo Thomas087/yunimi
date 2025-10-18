@@ -47,8 +47,10 @@ const updateField = (field: keyof CompanyData, value: string) => {
         <label for="professionalEmail" class="signup-field-label field-label">Professional Email *</label>
         <InputText
           id="professionalEmail"
+          name="professionalEmail"
           v-model="companyData.professionalEmail"
           type="email"
+          autocomplete="email"
           placeholder="your.email@company.com"
           :class="{ 'p-invalid': errors.professionalEmail }"
           @input="updateField('professionalEmail', ($event.target as HTMLInputElement).value)"
@@ -68,7 +70,10 @@ const updateField = (field: keyof CompanyData, value: string) => {
         <label for="companyName" class="signup-field-label field-label">Company Name *</label>
         <InputText
           id="companyName"
+          name="companyName"
           v-model="companyData.name"
+          type="text"
+          autocomplete="organization"
           placeholder="Enter your company name"
           :class="{ 'p-invalid': errors.companyName }"
           @input="updateField('name', ($event.target as HTMLInputElement).value)"
@@ -88,7 +93,10 @@ const updateField = (field: keyof CompanyData, value: string) => {
         <label for="website" class="signup-field-label field-label">Website URL *</label>
         <InputText
           id="website"
+          name="website"
           v-model="companyData.website"
+          type="url"
+          autocomplete="url"
           placeholder="https://yourcompany.com"
           :class="{ 'p-invalid': errors.website }"
           @input="updateField('website', ($event.target as HTMLInputElement).value)"
@@ -110,7 +118,10 @@ const updateField = (field: keyof CompanyData, value: string) => {
           <span class="signup-input-prefix input-prefix">@</span>
           <InputText
             id="instagram"
+            name="instagram"
             v-model="companyData.instagram"
+            type="text"
+            autocomplete="username"
             placeholder="yourcompany"
             :class="{ 'p-invalid': errors.instagram }"
             @input="updateField('instagram', ($event.target as HTMLInputElement).value)"
