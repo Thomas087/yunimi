@@ -251,6 +251,21 @@ const goBack = () => {
   margin-top: 0px; /* Compensate for fixed navbar */
 }
 
+/* Remove container constraints on mobile for better space utilization */
+@media (max-width: 768px) {
+  .signup-container {
+    max-width: none;
+    margin: 0;
+    padding: 0 10px; /* Minimal padding for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 0 5px; /* Even more minimal padding for very small screens */
+  }
+}
+
 .signup-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -335,7 +350,11 @@ const goBack = () => {
 
 @media (max-width: 768px) {
   .signup-page {
-    padding: 50px 20px;
+    padding: 50px 0; /* Remove horizontal padding since container handles it */
+  }
+  
+  .signup-header {
+    display: none; /* Hide header on mobile to save space */
   }
   
   .section-title {
@@ -343,7 +362,18 @@ const goBack = () => {
   }
   
   .signup-card {
-    padding: 2rem;
+    padding: 1.5rem; /* Reduced padding for mobile */
+    margin: 0 10px; /* Add margin to prevent edge-to-edge on very small screens */
+    background: transparent; /* Remove white background on mobile */
+    border: none; /* Remove border on mobile */
+    border-radius: 0; /* Remove border radius on mobile */
+    box-shadow: none; /* Remove shadow on mobile */
+  }
+  
+  .signup-card:hover {
+    transform: none; /* Disable hover effects on mobile */
+    box-shadow: none;
+    border-color: transparent;
   }
   
   .step-content {
@@ -361,25 +391,36 @@ const goBack = () => {
   }
 
   .signup-container {
-    margin-top: 70px;
+    margin-top: 40px;
   }
 }
 
 @media (max-width: 480px) {
   .signup-page {
-    padding: 40px 20px;
+    padding: 40px 0; /* Remove horizontal padding since container handles it */
+  }
+  
+  .signup-header {
+    display: none; /* Hide header on mobile to save space */
   }
   
   .section-title {
     font-size: 1.75rem;
   }
   
-  .signup-header {
-    margin-bottom: 2.5rem;
+  .signup-card {
+    padding: 1.25rem; /* Further reduced padding for very small screens */
+    margin: 0 5px; /* Smaller margin for very small screens */
+    background: transparent; /* Remove white background on mobile */
+    border: none; /* Remove border on mobile */
+    border-radius: 0; /* Remove border radius on mobile */
+    box-shadow: none; /* Remove shadow on mobile */
   }
   
-  .signup-card {
-    padding: 1.5rem;
+  .signup-card:hover {
+    transform: none; /* Disable hover effects on mobile */
+    box-shadow: none;
+    border-color: transparent;
   }
   
   .step-content {
