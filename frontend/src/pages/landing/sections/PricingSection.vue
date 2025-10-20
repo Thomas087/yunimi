@@ -8,7 +8,7 @@ const router = useRouter()
 const plans = ref([
   {
     name: "Starter",
-    price: "$99",
+    price: "$49",
     features: [
       "AI translations",
       "Automated publishing",
@@ -18,7 +18,7 @@ const plans = ref([
   },
   {
     name: "Standard",
-    price: "$149",
+    price: "$79",
     features: [
       "AI translations",
       "Automated publishing",
@@ -28,7 +28,7 @@ const plans = ref([
   },
   {
     name: "Advanced",
-    price: "$199",
+    price: "$99",
     features: [
       "AI translations",
       "Automated publishing",
