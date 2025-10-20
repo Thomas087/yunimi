@@ -143,6 +143,12 @@ const handleGetStarted = () => {
   justify-content: center;
 }
 
+@media (min-width: 768px) {
+.about-stats > div:first-child {
+  padding-top: 0;
+}
+}
+
 .stat-item {
   text-align: center;
   padding: 1.5rem 0;
